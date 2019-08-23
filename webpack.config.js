@@ -25,15 +25,15 @@ module.exports = {
             'ScrollMagic': 'scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
             'animation.gsap': 'scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
             'debug.addIndicators': 'scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js',
-            // 'snapsvg': 'snapsvg/dist/snap.svg.js',
+            'snapsvg': 'snapsvg/dist/snap.svg.js',
         }
     },
     module: {
         rules: [
-            // {
-            //     test: require.resolve('snapsvg/dist/snap.svg.js'),
-            //     use: 'imports-loader?this=>window,fix=>module.exports=0',
-            // },
+            {
+                test: require.resolve('snapsvg/dist/snap.svg.js'),
+                use: 'imports-loader?this=>window,fix=>module.exports=0',
+            },
             {
                 test: /\.js$/,
                 use: 'babel-loader',
@@ -76,10 +76,10 @@ module.exports = {
             //sync: /index/,
             defaultAttribute: 'defer'
         }),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery",
-        }),
+        // new webpack.ProvidePlugin({
+        //     $: "jquery",
+        //     jQuery: "jquery",
+        // }),
         new CopyWebpackPlugin([
             // './favicon.ico',
             './README.md',

@@ -37,7 +37,8 @@
   },
   "dependencies": {
     "gsap": "^2.0.2",
-    "scrollmagic": "^2.0.6"
+    "scrollmagic": "^2.0.6",
+    "snapsvg": "^0.5.1"
   },
   "bugs": {
     "url": "https://github.com/Roytangrb/mapping-the-routes/issues"
