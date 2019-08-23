@@ -1,0 +1,33 @@
+.container{
+	margin: 0 50px;
+}
+
+.map-text-container{
+	width: 100%;
+	display: flex;
+}
+
+#map-container{
+	width: 50%;
+}
+
+#map{
+	width: 400px;
+	height: auto;
+}
+
+path{
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.path{
+	fill:none;
+	stroke:#000;
+	stroke-width: 1px;
+}
+
+.text{
+	width: 50%;
+}
+
