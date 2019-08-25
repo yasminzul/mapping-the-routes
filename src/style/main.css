@@ -3,15 +3,17 @@
 	overflow: hidden;
 }
 
+/*map container is pinned as position: fixed, margin won't apply*/
 #map-container{
 	width: 100%;
 	height: auto;
 	background: #fff;
-	padding: 15px 0px;
+	overflow: hidden;
 }
 
 #map{
 	width: 100%;
+	margin: 15px 0px;
 	height: auto;
 }
 

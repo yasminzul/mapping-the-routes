@@ -17,7 +17,7 @@ const renderPath = (id)=>{
       class="path">
     </path>`
   
-  $map.appendChild(g)
+  $('#map-groups').appendChild(g)
 
   return $(`#${id}`)
 }
@@ -30,7 +30,9 @@ const pathPrepare = $path => {
 }
 
 Map.initScrollController = ()=>{
+  const $groups = $('#map-groups')
   const $path = renderPath('my-path')
+  const $container = $('#map-container')
   // prepare SVG
   pathPrepare($path)
 
@@ -39,13 +41,16 @@ Map.initScrollController = ()=>{
 
   // build tween
   var tween = new TimelineMax()
-    .add(TweenMax.to($map, 0.1, {transform: 'translate(-200px, -20px) scale(3, 3)', ease:Linear.easeNone}))
+    //map pan and zoom
+    .add(TweenMax.to($groups, 0.1, {transform: 'scale(3, 3) translate(-500px, -100px)', ease:Linear.easeNone}))
+    //draw svg path
     .add(TweenMax.to($path, 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
-    .add(TweenMax.to($path, 1, {stroke: "#33629c", ease:Linear.easeNone}), 0);     // change color during the whole thing
+    // change color during the whole thing
+    .add(TweenMax.to($path, 1, {stroke: "#33629c", ease:Linear.easeNone}), 0)
 
   // build scene
-  var scene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: $('#trigger1').offsetHeight, tweenChanges: true})
-          .setPin('#map-container', {pushFollowers: false})
+  var scene = new ScrollMagic.Scene({triggerElement: $container, triggerHook: 'onLeave', duration: $('#trigger1').offsetHeight, tweenChanges: true})
+          .setPin($container, {pushFollowers: false})
           .setTween(tween)
           // .addIndicators()
           .addTo(controller);
