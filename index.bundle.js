@@ -167,6 +167,18 @@ eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./src/style/progress-bar.css":
+/*!**************************************************************!*\
+  !*** ./node_modules/css-loader!./src/style/progress-bar.css ***!
+  \**************************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \"/* Progress Bar */\\n#progress-div{\\n    position:fixed;\\n    width:100%;\\n    height:15px;\\n    background-color: rgb(236, 234, 234);\\n    top:0px;\\n    left:0px;\\n    z-index: 999;\\n}\\n#progress-bar{\\n    position: absolute;\\n    float:left;\\n    height:100%;\\n    background-color: #a8f5a8;\\n    -webkit-transition: width 0.3s; /* Safari */\\n    transition: width 0.3s;\\n}\\n/* Progress Bar */\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/style/progress-bar.css?./node_modules/css-loader");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -176,7 +188,7 @@ eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.css */ \"./src/style/main.css\");\n/* harmony import */ var _style_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _map_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./map.js */ \"./src/map.js\");\n\n\n_map_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ \"a\"].initMap();\n_map_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ \"a\"].initScrollController();\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.css */ \"./src/style/main.css\");\n/* harmony import */ var _style_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _map_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./map.js */ \"./src/map.js\");\n/* harmony import */ var _style_progress_bar_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style/progress-bar.css */ \"./src/style/progress-bar.css\");\n/* harmony import */ var _style_progress_bar_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_progress_bar_css__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _progress_bar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./progress-bar.js */ \"./src/progress-bar.js\");\n\n\n\n\n_map_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ \"a\"].initMap();\n_map_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ \"a\"].initScrollController();\n_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__[/* default */ \"a\"].initScrollController();\n_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__[/* default */ \"a\"].initClickNav();\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -193,6 +205,19 @@ eval("/* harmony import */ var TweenMax__WEBPACK_IMPORTED_MODULE_0__ = __webpack
 
 /***/ }),
 
+/***/ "./src/progress-bar.js":
+/*!*****************************!*\
+  !*** ./src/progress-bar.js ***!
+  \*****************************/
+/*! exports provided: default */
+/*! exports used: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("/* harmony import */ var TweenMax__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! TweenMax */ \"./node_modules/gsap/src/minified/TweenMax.min.js\");\n/* harmony import */ var TweenMax__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(TweenMax__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var ScrollMagic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ScrollMagic */ \"./node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js\");\n/* harmony import */ var ScrollMagic__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(ScrollMagic__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var animation_gsap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! animation.gsap */ \"./node_modules/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js\");\n/* harmony import */ var animation_gsap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(animation_gsap__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nvar $ = function $(q) {\n  return document.querySelector(q);\n};\n\nvar ProgressBar = function ProgressBar() {};\n\nProgressBar.initScrollController = function () {\n  var $bar = $('#progress-bar');\n  var $body = document.body;\n  var bodyHeight = $body.offsetHeight; // init controller\n\n  var controller = new ScrollMagic__WEBPACK_IMPORTED_MODULE_1___default.a.Controller(); // build tween\n\n  var tween = new TimelineMax().add(TweenMax__WEBPACK_IMPORTED_MODULE_0___default.a.to($bar, 1, {\n    width: '100%',\n    ease: Linear.easeNone\n  })); // build scene\n\n  var scene = new ScrollMagic__WEBPACK_IMPORTED_MODULE_1___default.a.Scene({\n    triggerElement: $body,\n    triggerHook: 'onLeave',\n    duration: bodyHeight,\n    tweenChanges: true\n  }).setTween(tween).addTo(controller);\n};\n\nProgressBar.initClickNav = function () {\n  var $barContainer = $('#progress-div');\n  var $bar = $('#progress-bar');\n\n  var handler = function handler(event) {\n    var bodyWidth = document.body.offsetWidth;\n    var bodyHeight = document.body.offsetHeight;\n    var pageX = parseInt(event.pageX);\n\n    if (pageX > 0) {\n      var ratio = pageX / bodyWidth;\n      var scrollTop = bodyHeight * ratio;\n      window.scrollTo({\n        top: scrollTop,\n        behavior: 'smooth'\n      });\n    }\n  }; //add listener for click\n\n\n  $barContainer.addEventListener('click', handler); //add listener for touch\n\n  $barContainer.addEventListener('touchend', handler);\n};\n\n/* harmony default export */ __webpack_exports__[\"a\"] = (ProgressBar);\n\n//# sourceURL=webpack:///./src/progress-bar.js?");
+
+/***/ }),
+
 /***/ "./src/style/main.css":
 /*!****************************!*\
   !*** ./src/style/main.css ***!
@@ -201,6 +226,17 @@ eval("/* harmony import */ var TweenMax__WEBPACK_IMPORTED_MODULE_0__ = __webpack
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./main.css */ \"./node_modules/css-loader/index.js!./src/style/main.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/style/main.css?");
+
+/***/ }),
+
+/***/ "./src/style/progress-bar.css":
+/*!************************************!*\
+  !*** ./src/style/progress-bar.css ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./progress-bar.css */ \"./node_modules/css-loader/index.js!./src/style/progress-bar.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/style/progress-bar.css?");
 
 /***/ })
 
