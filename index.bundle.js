@@ -155,6 +155,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/css-loader/index.js!./src/style/bookmark.css":
+/*!**********************************************************!*\
+  !*** ./node_modules/css-loader!./src/style/bookmark.css ***!
+  \**********************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".chapter-title{\\n\\tdisplay: flex;\\n\\tjustify-content: space-between;\\n\\talign-items: center;\\n}\\n\\n.bookmark {\\n\\tposition: relative;\\n\\tdisplay: inline-block;\\n  width: 0;\\n  height: 0;\\n  \\n  margin: 0em .9em 1.2em .9em;\\n  \\n  border-right:  .3em solid transparent;\\n  border-bottom: .7em  solid #FC0;\\n  border-left:   .3em solid transparent;\\n\\n  /* Controlls the size of the stars. */\\n  font-size: 0.5em;\\n}\\n\\n.bookmark:hover{\\n\\tcursor: pointer;\\n}\\n\\n.bookmark::before, .bookmark::after {\\n  content: '';\\n  \\n  display: block;\\n  width: 0;\\n  height: 0;\\n  \\n  position: absolute;\\n  top: .6em;\\n  left: -1em;\\n\\n  border-right:  1em solid transparent;\\n  border-bottom: .7em  solid #FC0;\\n  border-left:   1em solid transparent;\\n\\n  transform: rotate(-35deg);\\n}\\n  \\n.bookmark::after {  \\n  transform: rotate(35deg);\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/style/bookmark.css?./node_modules/css-loader");
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./src/style/main.css":
 /*!******************************************************!*\
   !*** ./node_modules/css-loader!./src/style/main.css ***!
@@ -163,7 +175,19 @@
 /*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \"body {\\n\\tmargin: 0px;\\n\\twidth: 100vw;\\n\\toverflow-x: hidden;\\n}\\n\\n.container{\\n\\tmargin: 0 30px;\\n}\\n\\n/*map container is pinned as position: fixed, margin won't apply*/\\n#map-container{\\n\\twidth: 100vw;\\n\\theight: auto;\\n\\tbackground: #fff;\\n\\toverflow: hidden;\\n\\tmargin-left: -30px;\\n\\tmargin-right: -30px;\\n}\\n\\n#map{\\n\\twidth: 100%;\\n\\tmargin: 15px 0px;\\n\\theight: auto;\\n}\\n\\npath{\\n\\tstroke-linecap: round;\\n\\tstroke-linejoin: round;\\n}\\n\\n.path{\\n\\tfill:none;\\n\\tstroke:#000;\\n\\tstroke-width: 1px;\\n}\\n\\n\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/style/main.css?./node_modules/css-loader");
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \"body {\\n\\tmargin: 0px;\\n\\twidth: 100vw;\\n\\toverflow-x: hidden;\\n}\\n\\n.container{\\n\\tmargin: 0 30px;\\n\\toverflow: hidden;\\n}\\n\\n/*map container is pinned as position: fixed, margin won't apply*/\\n#map-container{\\n\\twidth: 100vw;\\n\\theight: auto;\\n\\tbackground: #fff;\\n\\toverflow: hidden;\\n\\tmargin-left: -30px;\\n\\tmargin-right: -30px;\\n}\\n\\n#map{\\n\\twidth: 100%;\\n\\tmargin: 15px 0px;\\n\\theight: auto;\\n}\\n\\npath{\\n\\tstroke-linecap: round;\\n\\tstroke-linejoin: round;\\n}\\n\\n.path{\\n\\tfill:none;\\n\\tstroke:#000;\\n\\tstroke-width: 1px;\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/style/main.css?./node_modules/css-loader");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./src/style/overlay.css":
+/*!*********************************************************!*\
+  !*** ./node_modules/css-loader!./src/style/overlay.css ***!
+  \*********************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \"#overlay{\\n\\tdisplay: none;\\n\\tflex-direction: column;\\n\\tjustify-content: center;\\n\\talign-items: center;\\n\\tposition: fixed;\\n\\ttop: 0;\\n\\tleft: 0;\\n\\twidth: 100vw;\\n\\theight: 100vh;\\n\\tz-index: 999;\\n\\tbackground: rgba(0, 0, 0, 0.4);\\n\\toverflow: hidden;\\n}\\n\\n#overlay input[type=\\\"text\\\"]{\\n\\twidth: 80%;\\n\\tmax-width: 300px;\\n\\tline-height: 25px;\\n\\tborder-radius: 5px;\\n\\tz-index: 1000;\\n}\\n\\n#overlay button{\\n\\tbackground: #fff;\\n\\tmargin: 20px; \\n\\tborder-radius: 5px;\\n\\tz-index: 1000;\\n}\\n\\n#submit-message{\\n\\tfont-size: 10px;\\n\\tcolor: red;\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/style/overlay.css?./node_modules/css-loader");
 
 /***/ }),
 
@@ -175,7 +199,7 @@ eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-
 /*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \"/* Progress Bar */\\n#progress-div{\\n    position:fixed;\\n    width:100%;\\n    height:15px;\\n    background-color: rgb(236, 234, 234);\\n    top:0px;\\n    left:0px;\\n    z-index: 999;\\n}\\n#progress-bar{\\n    position: absolute;\\n    float:left;\\n    height:100%;\\n    background-color: #a8f5a8;\\n    -webkit-transition: width 0.3s; /* Safari */\\n    transition: width 0.3s;\\n}\\n/* Progress Bar */\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/style/progress-bar.css?./node_modules/css-loader");
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \"/* Progress Bar */\\n#progress-div{\\n    position:fixed;\\n    width:100%;\\n    height:15px;\\n    background-color: rgb(236, 234, 234);\\n    top:0px;\\n    left:0px;\\n    z-index: 999;\\n}\\n#progress-bar{\\n    position: absolute;\\n    float:left;\\n    height:100%;\\n    background-color: #a8f5a8;\\n    -webkit-transition: width 0.3s; /* Safari */\\n    transition: width 0.3s;\\n}\\n#progress-div:hover, #progress-bar:hover{\\n    cursor: pointer;\\n}\\n/* Progress Bar */\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/style/progress-bar.css?./node_modules/css-loader");
 
 /***/ }),
 
@@ -188,7 +212,7 @@ eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.css */ \"./src/style/main.css\");\n/* harmony import */ var _style_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _map_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./map.js */ \"./src/map.js\");\n/* harmony import */ var _style_progress_bar_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style/progress-bar.css */ \"./src/style/progress-bar.css\");\n/* harmony import */ var _style_progress_bar_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_progress_bar_css__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _progress_bar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./progress-bar.js */ \"./src/progress-bar.js\");\n/* harmony import */ var _url_hash_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./url-hash.js */ \"./src/url-hash.js\");\n\n\n\n\n\n_map_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ \"a\"].initScrollController();\n_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__[/* default */ \"a\"].initScrollController();\n_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__[/* default */ \"a\"].initClickNav();\n_url_hash_js__WEBPACK_IMPORTED_MODULE_4__[/* default */ \"a\"].initHashController();\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.css */ \"./src/style/main.css\");\n/* harmony import */ var _style_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _map_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./map.js */ \"./src/map.js\");\n/* harmony import */ var _style_progress_bar_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style/progress-bar.css */ \"./src/style/progress-bar.css\");\n/* harmony import */ var _style_progress_bar_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_progress_bar_css__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _progress_bar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./progress-bar.js */ \"./src/progress-bar.js\");\n/* harmony import */ var _url_hash_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./url-hash.js */ \"./src/url-hash.js\");\n/* harmony import */ var _style_bookmark_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style/bookmark.css */ \"./src/style/bookmark.css\");\n/* harmony import */ var _style_bookmark_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_style_bookmark_css__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _style_overlay_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style/overlay.css */ \"./src/style/overlay.css\");\n/* harmony import */ var _style_overlay_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_style_overlay_css__WEBPACK_IMPORTED_MODULE_6__);\n/* harmony import */ var _subscribe_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./subscribe.js */ \"./src/subscribe.js\");\n\n\n\n\n\n\n\n\n_map_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ \"a\"].initScrollController();\n_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__[/* default */ \"a\"].initScrollController();\n_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__[/* default */ \"a\"].initClickNav();\n_url_hash_js__WEBPACK_IMPORTED_MODULE_4__[/* default */ \"a\"].initHashController();\n_subscribe_js__WEBPACK_IMPORTED_MODULE_7__[/* default */ \"a\"].initBookmark();\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -218,6 +242,17 @@ eval("/* harmony import */ var TweenMax__WEBPACK_IMPORTED_MODULE_0__ = __webpack
 
 /***/ }),
 
+/***/ "./src/style/bookmark.css":
+/*!********************************!*\
+  !*** ./src/style/bookmark.css ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./bookmark.css */ \"./node_modules/css-loader/index.js!./src/style/bookmark.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/style/bookmark.css?");
+
+/***/ }),
+
 /***/ "./src/style/main.css":
 /*!****************************!*\
   !*** ./src/style/main.css ***!
@@ -229,6 +264,17 @@ eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./m
 
 /***/ }),
 
+/***/ "./src/style/overlay.css":
+/*!*******************************!*\
+  !*** ./src/style/overlay.css ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./overlay.css */ \"./node_modules/css-loader/index.js!./src/style/overlay.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/style/overlay.css?");
+
+/***/ }),
+
 /***/ "./src/style/progress-bar.css":
 /*!************************************!*\
   !*** ./src/style/progress-bar.css ***!
@@ -237,6 +283,19 @@ eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./m
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./progress-bar.css */ \"./node_modules/css-loader/index.js!./src/style/progress-bar.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/style/progress-bar.css?");
+
+/***/ }),
+
+/***/ "./src/subscribe.js":
+/*!**************************!*\
+  !*** ./src/subscribe.js ***!
+  \**************************/
+/*! exports provided: default */
+/*! exports used: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("var Subscribe = {};\nvar data = {\n  isOverlayShown: false,\n  isEmailSaved: false\n};\n\nvar $ = function $(q) {\n  return document.querySelector(q);\n};\n\nvar $$ = function $$(q) {\n  return document.querySelectorAll(q);\n};\n\nSubscribe.initBookmark = function () {\n  var $bookmarkBtns = $$('.bookmark');\n  var $overlay = $('#overlay');\n  $bookmarkBtns.forEach(function (btn) {\n    btn.addEventListener('click', function (evt) {\n      $overlay.style.display = data.isOverlayShown ? 'none' : 'flex';\n      data.isOverlayShown = !data.isOverlayShown;\n    });\n  });\n  $overlay.addEventListener('click', function (evt) {\n    $overlay.style.display = 'none';\n    data.isOverlayShown = false;\n  }); //submit email for sending read reminder\n\n  var $submit = $('#submit-reminder');\n  var $input = $('input#email');\n  var message = $('#submit-message');\n\n  var validateEmail = function validateEmail() {\n    var email = $input.value;\n    var regex = /^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/;\n    return regex.test(String(email).toLowerCase());\n  };\n\n  $input.addEventListener('click', function (evt) {\n    evt.stopPropagation();\n  });\n  $submit.addEventListener('click', function (evt) {\n    evt.stopPropagation();\n\n    if (validateEmail()) {\n      data.isEmailSaved = true;\n      $input.disabled = true;\n      $submit.disabled = true;\n      message.innerHTML = 'Your email has been received!';\n    } else {\n      message.innerHTML = 'Invalid Email!';\n    }\n  });\n};\n\n/* harmony default export */ __webpack_exports__[\"a\"] = (Subscribe);\n\n//# sourceURL=webpack:///./src/subscribe.js?");
 
 /***/ }),
 
