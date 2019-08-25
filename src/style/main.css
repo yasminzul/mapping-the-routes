@@ -1,19 +1,18 @@
 .container{
-	margin: 0 50px;
-}
-
-.map-text-container{
-	width: 100%;
-	display: flex;
+	margin: 0 30px;
 }
 
 #map-container{
-	width: 50%;
+	width: 100%;
+	height: auto;
+	background: #fff;
+	padding: 15px 0px;
 }
 
 #map{
 	width: 400px;
 	height: auto;
+	z-index: 999;
 }
 
 path{
@@ -25,9 +24,5 @@ path{
 	fill:none;
 	stroke:#000;
 	stroke-width: 1px;
-}
-
-.text{
-	width: 50%;
 }
 

@@ -51,7 +51,7 @@ Map.initScrollController = ()=>{
 
   // build scene
   var scene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: $('#trigger1').offsetHeight, tweenChanges: true})
-          .setPin('#map')
+          .setPin('#map-container', {pushFollowers: false})
           .setTween(tween)
           .addIndicators() // add indicators (requires plugin)
           .addTo(controller);
