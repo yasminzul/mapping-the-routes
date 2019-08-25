@@ -6,6 +6,7 @@ body {
 
 .container{
 	margin: 0 30px;
+	overflow: hidden;
 }
 
 /*map container is pinned as position: fixed, margin won't apply*/
@@ -34,4 +35,3 @@ path{
 	stroke:#000;
 	stroke-width: 1px;
 }
-

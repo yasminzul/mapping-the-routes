@@ -16,4 +16,7 @@
     -webkit-transition: width 0.3s; /* Safari */
     transition: width 0.3s;
 }
+#progress-div:hover, #progress-bar:hover{
+    cursor: pointer;
+}
 /* Progress Bar */
