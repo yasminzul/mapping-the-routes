@@ -29,13 +29,6 @@ const pathPrepare = $path => {
   return lineLength
 }
 
-Map.initMap = () => {
-  $map.style.width = $('#map-container').offsetWidth
-  window.addEventListener('resize', ()=>{
-    $map.style.width = $('#map-container').offsetWidth
-  })  
-}
-
 Map.initScrollController = ()=>{
   const $path = renderPath('my-path')
   // prepare SVG
@@ -46,7 +39,7 @@ Map.initScrollController = ()=>{
 
   // build tween
   var tween = new TimelineMax()
-    .add(TweenMax.to($map, 0.1, {transform: 'translate(-200px, -100px) scale(3, 3)', ease:Linear.easeNone}))
+    .add(TweenMax.to($map, 0.1, {transform: 'translate(-200px, -20px) scale(3, 3)', ease:Linear.easeNone}))
     .add(TweenMax.to($path, 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
     .add(TweenMax.to($path, 1, {stroke: "#33629c", ease:Linear.easeNone}), 0);     // change color during the whole thing
 
@@ -54,7 +47,7 @@ Map.initScrollController = ()=>{
   var scene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: $('#trigger1').offsetHeight, tweenChanges: true})
           .setPin('#map-container', {pushFollowers: false})
           .setTween(tween)
-          .addIndicators() // add indicators (requires plugin)
+          // .addIndicators()
           .addTo(controller);
 }
 

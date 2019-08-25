@@ -6,7 +6,6 @@ import ProgressBar from './progress-bar.js'
 
 import Hash from './url-hash.js'
 
-Map.initMap()
 Map.initScrollController()
 
 ProgressBar.initScrollController()
