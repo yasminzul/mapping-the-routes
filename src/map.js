@@ -5,7 +5,7 @@ import 'debug.addIndicators'
 
 const $ = q => document.querySelector(q)
 const Map = ()=> {}
-const MapDom = $('#map')
+const $map = $('#map')
 
 const renderPath = (id)=>{
   const SVG_NS = 'http://www.w3.org/2000/svg'
@@ -17,7 +17,7 @@ const renderPath = (id)=>{
       class="path">
     </path>`
   
-  MapDom.appendChild(g)
+  $map.appendChild(g)
 
   return $(`#${id}`)
 }
@@ -30,14 +30,14 @@ const pathPrepare = $path => {
 }
 
 Map.initMap = () => {
-  MapDom.style.width = $('#map-container').offsetWidth
+  $map.style.width = $('#map-container').offsetWidth
   window.addEventListener('resize', ()=>{
-    MapDom.style.width = $('#map-container').offsetWidth
+    $map.style.width = $('#map-container').offsetWidth
   })  
 }
 
 Map.initScrollController = ()=>{
-  var $path = renderPath('my-path')
+  const $path = renderPath('my-path')
   // prepare SVG
   pathPrepare($path)
 
@@ -46,6 +46,7 @@ Map.initScrollController = ()=>{
 
   // build tween
   var tween = new TimelineMax()
+    .add(TweenMax.to($map, 0.1, {transform: 'translate(-200px, -100px) scale(3, 3)', ease:Linear.easeNone}))
     .add(TweenMax.to($path, 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
     .add(TweenMax.to($path, 1, {stroke: "#33629c", ease:Linear.easeNone}), 0);     // change color during the whole thing
 
