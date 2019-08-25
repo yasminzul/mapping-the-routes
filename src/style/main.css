@@ -35,3 +35,14 @@ path{
 	stroke:#000;
 	stroke-width: 1px;
 }
+
+.path-stop{
+	fill: #fff;
+	stroke: #000;
+	stroke-width: 0.3px;
+}
+
+.path-stop:hover{
+	cursor: pointer;
+	fill: #ccc;
+}

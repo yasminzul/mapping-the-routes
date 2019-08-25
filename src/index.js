@@ -1,4 +1,5 @@
 import './style/main.css'
+import './style/tooltip.css'
 import Map from './map.js'
 
 import './style/progress-bar.css'
@@ -11,6 +12,7 @@ import './style/overlay.css'
 import Subscribe from './subscribe.js'
 
 Map.initScrollController()
+Map.initTooltip()
 
 ProgressBar.initScrollController()
 ProgressBar.initClickNav()

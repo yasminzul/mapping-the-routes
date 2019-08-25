@@ -1,0 +1,31 @@
+#map-tooltip{
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+	flex-direction: column;
+	width: 100px;
+	height: 100px;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #000;
+	z-index: 1;
+	overflow: hidden;
+	padding: 5px;
+}
+
+#map-tooltip-title{
+	font-size: 14px;
+	font-weight: 600;
+}
+
+#map-tooltip-title-close{
+	font-family: Sans-serif;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+#map-tooltip-description{
+	font-size: 11px
+}

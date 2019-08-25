@@ -1,9 +1,12 @@
 import TweenMax from 'TweenMax'
 import ScrollMagic from 'ScrollMagic'
 import 'animation.gsap'
-import 'debug.addIndicators'
+
+import Tooltip from './tooltip.js'
 
 const $ = q => document.querySelector(q)
+const $$ = q => document.querySelectorAll(q)
+
 const Map = ()=> {}
 const $map = $('#map')
 
@@ -15,7 +18,9 @@ const renderPath = (id)=>{
       d="M628.1,220.9c-0.9-4.7-1.7-11.9,0.2-20c1.2-5,2.9-8.3,3.6-9.9c3.1-6.6,5.8-17.9,3.1-37.9" 
       id="${id}" 
       class="path">
-    </path>`
+    </path>
+    <circle class="path-stop" cx="628.1" cy="220.9" r="1" data-location="changlun"></circle>
+    `
   
   $('#map-groups').appendChild(g)
 
@@ -42,9 +47,10 @@ Map.initScrollController = ()=>{
   // build tween
   var tween = new TimelineMax()
     //map pan and zoom
-    .add(TweenMax.to($groups, 0.1, {transform: 'scale(3, 3) translate(-500px, -100px)', ease:Linear.easeNone}))
+    .add(TweenMax.to($groups, 0.2, {transform: 'scale(8, 8) translate(-580px, -180px)', ease:Linear.easeNone}), 0)
+    .add(TweenMax.to($groups, 0.8, {transform: 'scale(8, 8) translate(-580px, -130px)', ease:Linear.easeNone}), 0.2)
     //draw svg path
-    .add(TweenMax.to($path, 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
+    .add(TweenMax.to($path, 0.8, {strokeDashoffset: 0, ease:Linear.easeNone}), 0.2)
     // change color during the whole thing
     .add(TweenMax.to($path, 1, {stroke: "#33629c", ease:Linear.easeNone}), 0)
 
@@ -54,6 +60,15 @@ Map.initScrollController = ()=>{
           .setTween(tween)
           // .addIndicators()
           .addTo(controller);
+}
+
+Map.initTooltip = ()=>{
+  const stops = $$('.path-stop')
+  stops.forEach(stop => {
+    stop.addEventListener('click', evt=>{
+      Tooltip.toggle(evt, stop.dataset.location)
+    })
+  })
 }
 
 export default Map
