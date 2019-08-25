@@ -1,0 +1,19 @@
+/* Progress Bar */
+#progress-div{
+    position:fixed;
+    width:100%;
+    height:15px;
+    background-color: rgb(236, 234, 234);
+    top:0px;
+    left:0px;
+    z-index: 999;
+}
+#progress-bar{
+    position: absolute;
+    float:left;
+    height:100%;
+    background-color: #a8f5a8;
+    -webkit-transition: width 0.3s; /* Safari */
+    transition: width 0.3s;
+}
+/* Progress Bar */
