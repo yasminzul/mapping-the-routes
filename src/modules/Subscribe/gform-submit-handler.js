@@ -40,6 +40,12 @@ function getFormData(form) {
     }
   });
 
+  //add reading progress data
+  formData.progress = window.location.hash
+  formData.url = window.location.href
+
+  fields = fields.concat(['progress', 'url'])
+
   // add form-specific values into the data
   formData.formDataNameOrder = JSON.stringify(fields);
   formData.formGoogleSheetName = form.dataset.sheet || "responses"; // default sheet name
@@ -57,32 +63,34 @@ function disableAllButtons(form) {
 }
 
 const handleFormSubmit = form => {
-  var formData = getFormData(form);
-  console.log(formData)
+  var formData = getFormData(form)
+  const $message = document.querySelector('#submit-message')
   var data = formData.data;
 
   // If a honeypot field is filled, assume it was done so by a spam bot.
   if (formData.honeypot) {
+    $message.innerHTML = 'Spam Detected!'
     return false;
   }
+  $message.innerHTML = 'Sending...'
 
-  disableAllButtons(form);
-  var url = form.action;
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', url);
+  disableAllButtons(form)
+  var url = form.action
+  var xhr = new XMLHttpRequest()
+  xhr.open('POST', url)
   // xhr.withCredentials = true;
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
   xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        form.reset();
-        document.querySelector('#submit-message').innerHTML = 'Your email has been received!'
+        form.reset()
+        $message.innerHTML = 'Your email has been received!'
       }
   };
   // url encode form data for sending as post data
   var encoded = Object.keys(data).map(function(k) {
-      return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
-  }).join('&');
-  xhr.send(encoded);
+      return encodeURIComponent(k) + "=" + encodeURIComponent(data[k])
+  }).join('&')
+  xhr.send(encoded)
 }
 
 
