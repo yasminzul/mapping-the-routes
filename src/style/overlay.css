@@ -14,7 +14,7 @@
 }
 
 #overlay form {
-	display: flex;
+	display: inherit;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -23,6 +23,7 @@
 }
 
 #overlay input[type="email"]{
+	display: inherit;
 	width: 80%;
 	max-width: 300px;
 	line-height: 25px;
@@ -31,6 +32,7 @@
 }
 
 #overlay button{
+	display: inherit;
 	background: #fff;
 	margin: 20px; 
 	border-radius: 5px;
@@ -38,6 +40,7 @@
 }
 
 #submit-message{
+	display: inherit;
 	font-size: 10px;
 	color: red;
 }
