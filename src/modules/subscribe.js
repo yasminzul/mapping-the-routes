@@ -1,3 +1,5 @@
+import GFormSubmitHandler from './Subscribe/gform-submit-handler.js'
+
 const Subscribe = {}
 const data = {
 	isOverlayShown: false,
@@ -26,7 +28,7 @@ Subscribe.initBookmark = () => {
 	//submit email for sending read reminder
 	const $submit = $('#submit-reminder')
 	const $input = $('input#email')
-	const message = $('#submit-message')
+	const $message = $('#submit-message')
 	const validateEmail = ()=>{
 		const email =$input.value
 		const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -38,14 +40,17 @@ Subscribe.initBookmark = () => {
 	})
 
 	$submit.addEventListener('click', evt=>{
+		evt.preventDefault()
 		evt.stopPropagation()
-		if (validateEmail()) {
+		$message.innerHTML = ''
+		if (validateEmail() && !data.isEmailSaved) {
+			const $form = $('#bookmark-req-form')
+			GFormSubmitHandler($form) //use xhr to send the form
 			data.isEmailSaved = true
 			$input.disabled = true
 			$submit.disabled = true
-			message.innerHTML = 'Your email has been received!'
 		} else {
-			message.innerHTML = 'Invalid Email!'
+			$message.innerHTML = 'Invalid Email!'
 		}
 	})
 }

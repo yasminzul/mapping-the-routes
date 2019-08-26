@@ -13,7 +13,16 @@
 	overflow: hidden;
 }
 
-#overlay input[type="text"]{
+#overlay form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: auto;
+}
+
+#overlay input[type="email"]{
 	width: 80%;
 	max-width: 300px;
 	line-height: 25px;
