@@ -10,18 +10,26 @@ const infos = {
 	}
 }
 
-Tooltip.toggle = (evt, location) => {
-	const $tooltip = $('#map-tooltip')
-	const $title = $('#map-tooltip-title')
-	const $description = $('#map-tooltip-description')
+const $tooltip = $('#map-tooltip')
+const $title = $('#map-tooltip-title')
+const $description = $('#map-tooltip-description')
+const $underlay = $('#map-tooltip-underlay')
+const $close = $('#map-tooltip-title-close')
 
+const close = () => {
+	$tooltip.style.display = 'none'
+	$underlay.style.display = 'none'
+}
+
+Tooltip.toggle = (evt, location) => {
 	if (shown) {
-		$tooltip.style.display = 'none'
+		close()
 	} else {
 		const x = parseInt(evt.clientX)
 		const y = parseInt(evt.clientY)
 		if (x && y){
 			$tooltip.style.display = 'flex'
+			$underlay.style.display = 'block'
 			$tooltip.style.top = `${y}px`
 			$tooltip.style.left = `${x}px`
 			$title.innerHTML = infos[location].title
@@ -31,9 +39,16 @@ Tooltip.toggle = (evt, location) => {
 	shown = !shown
 }
 
-const $close = $('#map-tooltip-title-close')
+//init close function
 $close.addEventListener('click', ()=>{
-	$('#map-tooltip').style.display = 'none'
+	close()
+	shown = false
 })
+
+$underlay.addEventListener('click', ()=>{
+	close()
+	shown = false
+})
+
 
 export default Tooltip

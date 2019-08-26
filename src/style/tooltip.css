@@ -9,7 +9,7 @@
 	background: #fff;
 	border-radius: 5px;
 	border: 1px solid #000;
-	z-index: 1;
+	z-index: 2;
 	overflow: hidden;
 	padding: 5px;
 }
@@ -28,4 +28,15 @@
 
 #map-tooltip-description{
 	font-size: 11px
+}
+
+#map-tooltip-underlay{
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	overflow: hidden;
 }
