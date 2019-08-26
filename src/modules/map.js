@@ -2,13 +2,17 @@ import TweenMax from 'TweenMax'
 import ScrollMagic from 'ScrollMagic'
 import 'animation.gsap'
 
+import MapSVG from './Map/map-svg.js'
 import Tooltip from './tooltip.js'
 
 const $ = q => document.querySelector(q)
 const $$ = q => document.querySelectorAll(q)
 
 const Map = ()=> {}
-const $map = $('#map')
+
+Map.initMap = () => {
+  $('#map-container').innerHTML = MapSVG
+}
 
 const renderPath = (id)=>{
   const SVG_NS = 'http://www.w3.org/2000/svg'
