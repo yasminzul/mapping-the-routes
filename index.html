@@ -10,9 +10,11 @@
 
 <body>
 <div id="overlay">
-  <input type="text" name="email" id="email" placeholder="Email: ">
-  <button id="submit-reminder">Remind Me</button>
-  <div id="submit-message"></div>
+  <form id="bookmark-req-form" class="gform" method="POST" action="https://script.google.com/macros/s/AKfycbz4FSswkuXYH_613p5p0_CqVq9GsQtTosRMkVIsjw/exec">
+    <input type="email" name="email" id="email" placeholder="Email: ">
+    <button id="submit-reminder">Remind Me</button>
+    <div id="submit-message"></div>
+  </form>
 </div>
 <div id="progress-div">
   <div id="percent"></div>
