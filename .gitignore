@@ -65,3 +65,6 @@ dist/
 
 #exclude .ai file
 *.ai
+
+#exclude cpanel config
+cpanel/
