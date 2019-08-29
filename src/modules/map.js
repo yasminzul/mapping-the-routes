@@ -1,4 +1,5 @@
-import TweenMax from 'TweenMax'
+import TimelineLite from 'TimelineLite'
+
 import ScrollMagic from 'ScrollMagic'
 import 'animation.gsap'
 
@@ -49,14 +50,14 @@ Map.initScrollController = ()=>{
   var controller = new ScrollMagic.Controller();
 
   // build tween
-  var tween = new TimelineMax()
+  var tween = new TimelineLite()
     //map pan and zoom
-    .add(TweenMax.to($groups, 0.2, {transform: 'scale(8, 8) translate(-580px, -180px)', ease:Linear.easeNone}), 0)
-    .add(TweenMax.to($groups, 0.8, {transform: 'scale(8, 8) translate(-580px, -130px)', ease:Linear.easeNone}), 0.2)
+    .add(new TimelineLite().to($groups, 0.2, {transform: 'scale(8, 8) translate(-580px, -180px)', ease:Linear.easeNone}), 0)
+    .add(new TimelineLite().to($groups, 0.8, {transform: 'scale(8, 8) translate(-580px, -130px)', ease:Linear.easeNone}), 0.2)
     //draw svg path
-    .add(TweenMax.to($path, 0.8, {strokeDashoffset: 0, ease:Linear.easeNone}), 0.2)
+    .add(new TimelineLite().to($path, 0.8, {strokeDashoffset: 0, ease:Linear.easeNone}), 0.2)
     // change color during the whole thing
-    .add(TweenMax.to($path, 1, {stroke: "#33629c", ease:Linear.easeNone}), 0)
+    .add(new TimelineLite().to($path, 1, {stroke: "#33629c", ease:Linear.easeNone}), 0)
 
   // build scene
   var scene = new ScrollMagic.Scene({triggerElement: $container, triggerHook: 'onLeave', duration: $('#trigger1').offsetHeight, tweenChanges: true})

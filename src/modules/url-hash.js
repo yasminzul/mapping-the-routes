@@ -1,6 +1,4 @@
-import TweenMax from 'TweenMax'
 import ScrollMagic from 'ScrollMagic'
-import 'animation.gsap'
 
 const $ = q => document.querySelector(q)
 const $$ = q => document.querySelectorAll(q)
