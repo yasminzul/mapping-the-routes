@@ -46,3 +46,17 @@ path{
 	cursor: pointer;
 	fill: #ccc;
 }
+
+#geo-map-container{
+	width: 100vw;
+	height: auto;
+	background: #fff;
+	overflow: hidden;
+	margin: 15px -30px 15px -30px;
+}
+
+#geo-map{
+	width: 100%;
+	/*preserve aspect ratio of 960:500 => 500/960 * 100vw = */ 
+	height: 52vw;
+}

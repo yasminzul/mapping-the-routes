@@ -2,11 +2,9 @@ import * as d3 from 'd3'
 import * as topojson from 'topojson'
 
 const D3MAP = {}
+const $ = q => document.querySelector(q)
 
 D3MAP.renderMap = function(){
-	var margin = {top: 0, right: 0, bottom: 0, left: 0},
-	            width = 960 - margin.left - margin.right,
-	            height = 500 - margin.top - margin.bottom;
 
 	var color = d3.scaleThreshold()
 	    .domain([10000,100000,500000,1000000,5000000,10000000,50000000,100000000,500000000,1500000000])
@@ -14,30 +12,22 @@ D3MAP.renderMap = function(){
 
 	var path = d3.geoPath();
 
-	var svg = d3.select("body")
+	var svg = d3.select("#geo-map-container")
 	            .append("svg")
-	            .attr("width", width)
-	            .attr("height", height)
-	            .append('g')
-	            .attr('class', 'map');
+	            .attr('x', 0)
+	            .attr('y', 0)
+	            .attr('viewBox', '0 0 960 500')
+	            .attr('id', 'geo-map');
 
 	var g = svg.append("g")
 
+	var width = $('#geo-map').getBBox().width
+	var height = $('#geo-map').getBBox().height
 	var projection = d3.geoMercator()
 	                   .scale(130)
-	                   .translate( [width / 2, height / 1.5]);
+	                   // .translate([width / 2, height / 3]);
 
 	var path = d3.geoPath().projection(projection);
-
-	const zoom = d3.zoom()
-	    .scaleExtent([1, 40])
-	    .translateExtent([[0,0], [width, height]])
-	    .extent([[0, 0], [width, height]])
-	    .on("zoom", function (){
-	    g.attr("transform", d3.event.transform);
-	});
-
-	svg.call(zoom);
 
 	Promise.all([
 	    d3.json("assets/maps/world_countries.json"),
