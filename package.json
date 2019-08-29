@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --history-api-fallback --inline --progress",
     "build": "webpack",
     "publish": "node ./deploy",
-    "zip": "zip -r ./cpanel/mapping-the-routes.zip ./dist"
+    "zip": "zip -r ./cpanel/mapping-the-routes.zip ./dist",
+    "serve": "python3 -m http.server"
   },
   "repository": {
     "type": "git",
