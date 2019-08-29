@@ -40,9 +40,11 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "d3": "^5.11.0",
+    "d3-queue": "^3.0.7",
     "gsap": "^2.0.2",
     "scrollmagic": "^2.0.6",
-    "snapsvg": "^0.5.1"
+    "topojson": "^3.0.2"
   },
   "bugs": {
     "url": "https://github.com/Roytangrb/mapping-the-routes/issues"
