@@ -1,4 +1,4 @@
-import TimelineLite from 'TimelineLite'
+import TweenMax from 'TweenMax'
 
 import ScrollMagic from 'ScrollMagic'
 import 'animation.gsap'
@@ -14,7 +14,7 @@ ProgressBar.initScrollController = ()=>{
   var controller = new ScrollMagic.Controller();
 
   // build tween
-  var tween = new TimelineLite().to($bar, 1, {width: '100%', ease:Linear.easeNone})
+  var tween = new TimelineMax().to($bar, 1, {width: '100%', ease:Linear.easeNone})
 
   // build scene
   var scene = new ScrollMagic.Scene({triggerElement: $body, triggerHook: 'onLeave', duration: bodyHeight, tweenChanges: true})
