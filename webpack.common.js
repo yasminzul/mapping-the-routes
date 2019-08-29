@@ -6,7 +6,6 @@ const cleanWebpackPlugin = require('clean-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 
 module.exports = {
-    mode: 'development',
     entry: {
         index: __dirname + "/src/index.js",
     },
