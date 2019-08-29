@@ -11,6 +11,8 @@ import './style/bookmark.css'
 import './style/overlay.css'
 import Subscribe from './modules/subscribe.js'
 
+import D3MAP from './modules/d3-map.js'
+
 Map.initMap()
 Map.initScrollController()
 Map.initTooltip()
@@ -21,3 +23,5 @@ ProgressBar.initClickNav()
 Hash.initHashController()
 
 Subscribe.initBookmark()
+
+D3MAP.renderMap()

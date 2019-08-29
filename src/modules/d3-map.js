@@ -1,20 +1,9 @@
 import * as d3 from 'd3'
-import queue from 'd3-queue'
-import topojson from 'topojson'
+import * as topojson from 'topojson'
 
 const D3MAP = {}
 
 D3MAP.renderMap = function(){
-	var format = d3.format(",");
-
-	// Set tooltips
-	var tip = d3.tip()
-	            .attr('class', 'd3-tip')
-	            .offset([-10, 0])
-	            .html(function(d) {
-	              return "<strong>Country: </strong><span class='details'>" + d.properties.name + "<br></span>" + "<strong>Population: </strong><span class='details'>" + format(d.population) +"</span>";
-	            })
-
 	var margin = {top: 0, right: 0, bottom: 0, left: 0},
 	            width = 960 - margin.left - margin.right,
 	            height = 500 - margin.top - margin.bottom;
@@ -36,7 +25,7 @@ D3MAP.renderMap = function(){
 
 	var projection = d3.geoMercator()
 	                   .scale(130)
-	                  .translate( [width / 2, height / 1.5]);
+	                   .translate( [width / 2, height / 1.5]);
 
 	var path = d3.geoPath().projection(projection);
 
@@ -48,16 +37,20 @@ D3MAP.renderMap = function(){
 	    g.attr("transform", d3.event.transform);
 	});
 
-	svg.call(tip);
 	svg.call(zoom);
 
-	queue()
-	    .defer(d3.json, "/src/assets/maps/world_countries.json")
-	    .defer(d3.json, "/src/assets/maps/china.json")
-	    .defer(d3.tsv, "/src/assets/data/world_population.tsv")
-	    .await(ready);
+	Promise.all([
+	    d3.json("assets/maps/world_countries.json"),
+	    d3.json("assets/maps/china.json"),
+	    d3.tsv("assets/data/world_population.tsv"),
+	])
+	.then(ready)
+	.catch(err=>{
+		console.log('d3 data fetching err', err)
+	})
 
-	function ready(error, data, china, population) {
+	function ready(values) {
+		var [data, china, population] = values
 	  var populationById = {};
 
 	  population.forEach(function(d) { populationById[d.id] = +d.population; });
@@ -67,9 +60,9 @@ D3MAP.renderMap = function(){
 	  data.features = data.features.concat(china.features)
 
 	  g
-	      .attr("class", "countries")
+	    .attr("class", "countries")
 	    .selectAll("path")
-	      .data(data.features)
+	    .data(data.features)
 	    .enter().append("path")
 	      .attr("d", path)
 	      .style("fill", function(d) { return color(populationById[d.id]); })
@@ -80,16 +73,12 @@ D3MAP.renderMap = function(){
 	        .style("stroke","white")
 	        .style('stroke-width', 0.3)
 	        .on('mouseover',function(d){
-	          tip.show(d);
-
 	          d3.select(this)
 	            .style("opacity", 1)
 	            .style("stroke","white")
 	            .style("stroke-width",1);
 	        })
 	        .on('mouseout', function(d){
-	          tip.hide(d);
-
 	          d3.select(this)
 	            .style("opacity", 0.8)
 	            .style("stroke","white")

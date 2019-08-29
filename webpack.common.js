@@ -12,7 +12,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
-        publicPath: '' //relative path
+        publicPath: ''
     },
     resolve: {
         modules: ['node_modules'],
@@ -77,6 +77,7 @@ module.exports = {
         new CopyWebpackPlugin([
             // './favicon.ico',
             './README.md',
+            {from: './src/public/assets', to: 'assets'}
             // './favicon.png',
         ], {}) // options
     ],
