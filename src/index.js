@@ -1,4 +1,6 @@
 import './style/main.css'
+import './style/desktop.css'
+
 import './style/tooltip.css'
 import Map from './modules/map.js'
 

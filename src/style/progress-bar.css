@@ -2,8 +2,8 @@
 #progress-div{
     position:fixed;
     width:100%;
-    height:15px;
-    background-color: rgb(236, 234, 234);
+    height:3.5px;
+    background-color: #dcba7d;
     top:0px;
     left:0px;
     z-index: 999;
@@ -12,7 +12,7 @@
     position: absolute;
     float:left;
     height:100%;
-    background-color: #a8f5a8;
+    background-color: #fc7a00;
     -webkit-transition: width 0.3s; /* Safari */
     transition: width 0.3s;
 }
