@@ -91,6 +91,27 @@ body {
 	line-height: 12px;
 }
 
+
+.icon {
+	width: 20px;
+	height: 100%;
+	max-height: 23px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	border-left: 1px solid #dcba7d;
+	cursor: pointer;
+}
+
+.nav-right:last-child{
+	border-right: 1px solid #dcba7d;
+}
+
+.icon:hover{
+	background: #fff;
+}
+
 .pangolin-logo {
   width: 12px;
   height: 12px;
