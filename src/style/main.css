@@ -6,9 +6,21 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
+.mobile-hidden{
+	display: none;
+}
+
 .serif {
 	/*title serif font */
 	font-family: 'ZCOOL XiaoWei', serif;
+}
+
+.white {
+	color: #fff;
+}
+
+.yellow {
+	color: #dcba7d;
 }
 
 .header{
@@ -55,6 +67,35 @@ body {
 
 .header-indent{
 	margin-left: 21px;
+}
+
+.nav {
+	width: 100vw;
+	box-sizing: border-box;
+	padding: 0 10px;
+	height: 19px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #1d1d1d;
+	display: flex;
+	justify-content: space-between;
+	z-index: 999;
+}
+
+.nav-left, .nav-right{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	font-size: 12px;
+	line-height: 12px;
+}
+
+.pangolin-logo {
+  width: 12px;
+  height: 12px;
+  margin-right: 10px;
+  object-fit: contain;
 }
 
 .container{

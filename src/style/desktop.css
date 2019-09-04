@@ -1,4 +1,8 @@
 @media only screen and (min-device-width: 480px) {
+	.mobile-hidden{
+		display: block;
+	}
+
   .header { 
     background-image: url('/assets/images/header-image-v1.jpg'); 
   }
@@ -7,4 +11,11 @@
 		margin: 0 20%;
 	}
 
+	.nav {
+		height: 23px;
+	}
+
+	#progress-div{
+    top:23px !important;
+  }
 }
