@@ -5,7 +5,7 @@ module.exports = merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './src/public',
+        contentBase: './src/public/',
         port: 7700,
     }
 });

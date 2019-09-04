@@ -37,12 +37,18 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: [
+                'style-loader', {
+                    loader: 'css-loader',
+                    options: {
+                        url: false,
+                    }
+                }],
             },
-            {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-                use:['url-loader']
-            },
+            // {
+            //     test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+            //     use:['url-loader']
+            // },
             // {
             //     test: /\.(gif|jpe?g|svg)$/i,
             //     use: [
@@ -89,8 +95,4 @@ module.exports = {
         },
         usedExports: true
     },
-    devServer: {
-        contentBase: './src/public',
-        port: 7700,
-    }
 };
