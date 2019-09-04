@@ -3,6 +3,10 @@
 		display: block;
 	}
 
+	.desktop-hidden{
+		display: none;
+	}
+
   .header { 
     background-image: url('assets/images/header-image-v1.jpg'); 
   }
@@ -18,5 +22,11 @@
 
 	#progress-div{
     top:23px !important;
+  }
+
+  .footer{
+  	flex-direction: row;
+  	justify-content: space-between;
+  	align-items: flex-end;
   }
 }
