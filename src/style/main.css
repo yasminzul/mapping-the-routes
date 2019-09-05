@@ -239,14 +239,24 @@ body {
 }
 /*component*/
 
+/*snazzy map*/
+.snazzy{
+	width: 100vw;
+	height: 33.3vw;
+	margin-left: -15px;
+	margin-right: -15px;
+	background-image: url(assets/maps/malaysia/snazzy_melaka_straits.png);
+	background-size: cover;
+}
+/*snazzy map*/
+
 /*map container is pinned as position: fixed, margin won't apply*/
 #map-container{
 	width: 100vw;
 	height: auto;
 	background: #fff;
 	overflow: hidden;
-	margin-left: -15px;
-	margin-right: -15px;
+	margin: 0 -15px;
 }
 
 #map{

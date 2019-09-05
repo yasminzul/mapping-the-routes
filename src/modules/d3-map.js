@@ -97,7 +97,7 @@ D3MAP.renderMap = function(){
 	        // console.log(d3.event.transform)
 	  });
 
-	svg.call(zoom)
+	// svg.call(zoom)
 
 	function panZoom(transform){
 		var {k, x, y} = transform

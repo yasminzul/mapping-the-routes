@@ -45,9 +45,16 @@
   	left: 100%;
   }
 
-  #map-container{
-		margin-left: -25vw;
-		margin-right: -25vw;
+  .snazzy{
+		margin: 0 -25vw;
 	}
 
+  #map-container, #geo-map-container{
+		margin: 0 -25vw !important;
+	}
+
+	.scrollmagic-pin-spacer {
+		margin: 0 -25vw !important;
+		padding-left: 25vw !important;
+	}
 }
