@@ -1,4 +1,8 @@
 @media only screen and (min-device-width: 480px) {
+	.container{
+		margin: 0 25%;
+	}
+
 	.mobile-hidden{
 		display: block;
 	}
@@ -29,4 +33,10 @@
   	justify-content: space-between;
   	align-items: flex-end;
   }
+
+  #map-container{
+		margin-left: -25vw;
+		margin-right: -25vw;
+	}
+
 }
