@@ -34,6 +34,17 @@
   	align-items: flex-end;
   }
 
+  .quote-para{
+  	position: relative;
+  	width: 60%;
+  }
+
+  .quote{
+  	position: absolute;
+  	top: 0;
+  	left: 100%;
+  }
+
   #map-container{
 		margin-left: -25vw;
 		margin-right: -25vw;
