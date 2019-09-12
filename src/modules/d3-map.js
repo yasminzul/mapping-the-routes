@@ -35,11 +35,16 @@ var projection = d3.geoMercator()
 //path generator: convert geojson feature to svg path
 var path = d3.geoPath().projection(projection);
 
-var marginTitle = { top: 20, left: 50},
+var marginTitle = { top: 50, left: 50},
 		title = svg.append("text")
 	    .attr("class", "vis-title")
 	    .attr("transform", "translate(" + marginTitle.left + "," + marginTitle.top + ")")
 	    .text("# Pangolins (select a time range)");
+var marginCount = { top: 20, left: 50},
+		count = svg.append("text")
+	    .attr("class", "seizure-total")
+	    .attr("transform", "translate(" + marginCount.left + "," + marginCount.top + ")")
+	    .text("0 Pangolins");
 
 D3MAP.renderMap = function(){
 	Promise.all([
@@ -214,11 +219,11 @@ function brushCallback(dataForMap, x) {
   var newDateRange = d3.event.selection.map(x.invert) || x.domain()
   var filteredData = dataForMap.filter(d => (d.TIME >= newDateRange[0] && d.TIME <= newDateRange[1]) )
   updateMapPoints(filteredData)
-  updateTitleText(newDateRange);
+  updateTitleText(newDateRange, filteredData);
 }
 
 // Updates the vis title text to include the passed date array: [start Date, end Date]
-function updateTitleText(newDateArray) {
+function updateTitleText(newDateArray, filteredData) {
     if (!newDateArray) {
         title.text("Pangolin seizures (select a time range)");
     } else {
@@ -230,6 +235,9 @@ function updateTitleText(newDateArray) {
                    newDateArray[1].getFullYear();
         title.text("Pangolin seizures " + from + " - " + to);
     }
+    //update count
+    var total = filteredData.map(d=>+d.ESTNUM).reduce((acc, cur)=>acc+cur)
+    count.text(`${total} Pangolins`)
 }
 
 // Updates the points displayed on the map, to those in the passed data array
@@ -247,7 +255,7 @@ function updateMapPoints(data) {
     circles.enter().append("circle") // new entering points
         // .on("mouseover", tipMouseover)
         // .on("mouseout", tipMouseout)
-        .attr("fill", "rgba(0, 255, 255, 0.3)")
+        .attr("fill", "rgba(0, 0, 255, 0.3)")
         .attr("cx", function(d) { return projection([+d.Longitude, +d.Latitude])[0]; })
         .attr("cy", function(d) { return projection([+d.Longitude, +d.Latitude])[1]; })
         .attr("r",  0)
