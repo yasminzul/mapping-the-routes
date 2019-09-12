@@ -144,8 +144,8 @@ D3MAP.renderMap = function(){
 }
 
 function makeTimeline(dataForMap, dataForTimeline) {
-  var margin = { top: 10, right: 10, bottom: 20, left: 25 },
-      w = width - margin.left - margin.right,
+  var margin = { top: 10, right: 10, bottom: 20, left: 15 },
+      w = $('#timeline-container').offsetWidth - margin.left - margin.right,
       h = 80 - margin.top  - margin.bottom;
 
   var timelineSvg = d3.select("#timeline-container").append("svg")
@@ -196,39 +196,25 @@ function makeTimeline(dataForMap, dataForTimeline) {
       .style("font-size", '8px')
       .text("# Pangolins");
 
-  // Add brush to timeline, hook up to callback
+  // Add brush to timeline, hook up to callback\
+  //brush reference: http://rajvansia.com/scatterplotbrush-d3-v4.html
   var brush = d3.brushX()
-      .extent([0, w]) // initial value
-      .on("brush", function() { brushCallback(brush, dataForMap); })
-
+      .extent([[0, 0], [w, h]]) // brushable area
+      .on("brush end", function() { brushCallback(dataForMap, x); })
+  var initial_range = [new Date(2000, 1, 1), new Date(2001, 12, 31)].map(x)
   timeline.append("g")
-      .attr("class", "x brush")
-      // .call(brush)
-    .selectAll("rect")
-      .attr("y", -6)
-      .attr("height", h + 7);
-
-  // brush.event(timeline.select('g.x.brush')); // dispatches a single brush event
+      .attr("class", "brush")
+      .call(brush)
+			.call(brush.move, initial_range)
 };
 
 // Called whenever the timeline brush range (extent) is updated
 // Filters the map data to those points that fall within the selected timeline range
-function brushCallback(brush, dataForMap) {
-    if (brush.empty()) {
-        updateMapPoints([]);
-        updateTitleText();
-    } else {
-        var newDateRange = brush.extent(),
-            filteredData = [];
-
-        dataForMap.forEach(function(d) {
-            if (d.TIME >= newDateRange[0] && d.TIME <= newDateRange[1]) {
-                filteredData.push(d);
-            }
-        });
-        updateMapPoints(filteredData);
-        updateTitleText(newDateRange);
-    }
+function brushCallback(dataForMap, x) {
+  var newDateRange = d3.event.selection.map(x.invert) || x.domain()
+  var filteredData = dataForMap.filter(d => (d.TIME >= newDateRange[0] && d.TIME <= newDateRange[1]) )
+  updateMapPoints(filteredData)
+  updateTitleText(newDateRange);
 }
 
 // Updates the vis title text to include the passed date array: [start Date, end Date]
@@ -253,7 +239,7 @@ function updateMapPoints(data) {
     circles // update existing points
         // .on("mouseover", tipMouseover)
         // .on("mouseout", tipMouseout)
-        // .attr("fill", function(d) { return colorScale(d.CR); })
+        .attr("fill", "rgba(0, 0, 255, 0.3)")
         .attr("cx", function(d) { return projection([+d.Longitude, +d.Latitude])[0]; })
         .attr("cy", function(d) { return projection([+d.Longitude, +d.Latitude])[1]; })
         .attr("r",  function(d) { return radiusScale(+d.ESTNUM); });
@@ -261,7 +247,7 @@ function updateMapPoints(data) {
     circles.enter().append("circle") // new entering points
         // .on("mouseover", tipMouseover)
         // .on("mouseout", tipMouseout)
-        // .attr("fill", function(d) { return colorScale(d.CR); })
+        .attr("fill", "rgba(0, 255, 255, 0.3)")
         .attr("cx", function(d) { return projection([+d.Longitude, +d.Latitude])[0]; })
         .attr("cy", function(d) { return projection([+d.Longitude, +d.Latitude])[1]; })
         .attr("r",  0)

@@ -25,7 +25,7 @@
 	}
 
 	#progress-div{
-    top:23px !important;
+    top: 23px !important;
   }
 
   .footer{
@@ -59,9 +59,4 @@
 		padding-left: 25vw !important;
 	}
   /*animated map svg v1 [deprecated]*/
-
-	#geo-map-container{
-		width: 100%;
-		margin: 0;
-	}
 }

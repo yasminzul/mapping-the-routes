@@ -9,7 +9,6 @@ import ProgressBar from './modules/progress-bar.js'
 
 import Hash from './modules/url-hash.js'
 
-// import './style/bookmark.css'
 import './style/overlay.css'
 import Subscribe from './modules/subscribe.js'
 

@@ -290,15 +290,21 @@ path{
 /*animated map svg v1 [deprecated]*/
 
 #geo-map-container{
-	width: 100vw;
+	width: 100%;
 	height: auto;
 	background: #fff;
 	overflow: hidden;
-	margin: 15px -15px;
+	margin: 15px 0;
 }
 
 #geo-map{
 	width: 100%;
+}
+
+#timeline-container{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
 }
 
 .vis-title {
