@@ -249,6 +249,7 @@ body {
 }
 /*snazzy map*/
 
+/*animated map svg v1 [deprecated]*/
 /*map container is pinned as position: fixed, margin won't apply*/
 #map-container{
 	width: 100vw;
@@ -285,6 +286,7 @@ path{
 	cursor: pointer;
 	fill: #ccc;
 }
+/*animated map svg v1 [deprecated]*/
 
 #geo-map-container{
 	width: 100vw;
@@ -296,6 +298,4 @@ path{
 
 #geo-map{
 	width: 100%;
-	/*preserve aspect ratio of 960:500 => 500/960 * 100vw = */ 
-	height: 52vw;
 }
