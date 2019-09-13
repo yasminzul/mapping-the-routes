@@ -35,21 +35,24 @@ var projection = d3.geoMercator()
 //path generator: convert geojson feature to svg path
 var path = d3.geoPath().projection(projection);
 
-var marginTitle = { top: 50, left: 50},
-		title = svg.append("text")
+var title = svg.append("text")
 	    .attr("class", "vis-title")
-	    .attr("transform", "translate(" + marginTitle.left + "," + marginTitle.top + ")")
+	    .attr("transform", "translate(" + 50 + "," + 480 + ")")
 	    .text("# Pangolins (select a time range)");
-var marginCount = { top: 20, left: 50},
-		count = svg.append("text")
+var count = svg.append("text")
 	    .attr("class", "seizure-total")
-	    .attr("transform", "translate(" + marginCount.left + "," + marginCount.top + ")")
+	    .attr("transform", "translate(" + 50 + "," + 430 + ")")
 	    .text("0 Pangolins");
+
+//timeline svg and g init
+var timelineSvg = d3.select("#timeline-container").append("svg")
+var timeline = timelineSvg.append("g").attr("class", "timeline")
+var bursh_g = timeline.append("g").attr("class", "brush")
 
 D3MAP.renderMap = function(){
 	Promise.all([
 	    d3.json("assets/maps/world_countries.json"),
-	    d3.json("assets/maps/china.json"),
+	    // d3.json("assets/maps/china.json"),
 	    d3.csv("assets/data/valid-seizure-num-date.csv")
 	])
 	.then(ready)
@@ -58,8 +61,8 @@ D3MAP.renderMap = function(){
 	})
 
 	function ready(values) {
-		var [world, china, seizures] = values
-		renderChinaHeatmap(china)
+		var [world, seizures] = values
+		// renderChinaHeatmap(china)
 		// timeline map reference: https://bl.ocks.org/domhorvath/dd850c5e97d4022fbf0f11611a0cf528
 		var parseDate = d3.timeParse('%Y-%m-%d %H:%M:%S')
 
@@ -153,37 +156,52 @@ function makeTimeline(dataForMap, dataForTimeline) {
       w = $('#timeline-container').offsetWidth - margin.left - margin.right,
       h = 80 - margin.top  - margin.bottom;
 
-  var timelineSvg = d3.select("#timeline-container").append("svg")
+ 	timelineSvg
       .attr("width", w + margin.left + margin.right)
       .attr("height", h + margin.top + margin.bottom);
 
-  var timeline = timelineSvg.append("g")
-      .attr("class", "timeline")
+  timeline
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  //calculate sum of each year
+  var year_sums = {}
+  dataForTimeline.forEach(d =>{
+  	var year = d.TIME.getFullYear() + ""
+  	if (!year_sums[year]) {
+  		year_sums[year] = 0
+  	}
+  	year_sums[year] += +d.ESTNUM
+  })
+
+  var bar_data = Object.keys(year_sums).map(year => ({
+  	TIME: new Date(+year, 1, 1),
+  	TOTAL: year_sums[year]
+  }))
 
   var x = d3.scaleTime()
       .domain(d3.extent(dataForTimeline.map(function(d) { return d.TIME; })))
       .range([0, w]);
 
   var y = d3.scaleLinear()
-      .domain(d3.extent(dataForTimeline.map(function(d) { return d.ESTNUM; })))
+      .domain(d3.extent(bar_data.map(function(d) { return d.TOTAL; })))
       .range([h, 0]);
 
   var xAxis = d3.axisBottom(x)
 
   var yAxis = d3.axisRight(y)
-  	.ticks(2)
+  	.ticks(3)
   	.tickFormat(d3.format("~s"));;
 
-  var area = d3.area()
-      .x(function(d) { return x(d.TIME); })
-      .y0(h)
-      .y1(function(d) { return y(d.ESTNUM); });
-
-  timeline.append("path")
-      .datum(dataForTimeline)
-      .attr("class", "area")
-      .attr("d", area);
+ 	timeline.append("g")
+ 			.attr("class", "bars")
+ 			.selectAll('rect')
+ 			.data(bar_data, function(d){return d.TIME.getFullYear()})
+ 			.enter().append('rect').attr("class", 'bar')
+ 			.style('fill', 'steelblue')
+ 			.attr('x', function(d){return x(d.TIME)})
+ 			.attr('width', (Math.round(w / 20) - 10)+'px')
+ 			.attr('y', function(d){return y(d.TOTAL)})
+ 			.attr("height", function(d) { return h - y(d.TOTAL); });
 
   timeline.append("g")
       .attr("class", "x axis")
@@ -207,8 +225,8 @@ function makeTimeline(dataForMap, dataForTimeline) {
       .extent([[0, 0], [w, h]]) // brushable area
       .on("brush end", function() { brushCallback(dataForMap, x); })
   var initial_range = [new Date(2000, 1, 1), new Date(2001, 12, 31)].map(x)
-  timeline.append("g")
-      .attr("class", "brush")
+  
+  bursh_g
       .call(brush)
 			.call(brush.move, initial_range)
 };
@@ -216,6 +234,11 @@ function makeTimeline(dataForMap, dataForTimeline) {
 // Called whenever the timeline brush range (extent) is updated
 // Filters the map data to those points that fall within the selected timeline range
 function brushCallback(dataForMap, x) {
+	if (!d3.event.selection){
+  	updateTitleText(null, []);
+  	updateMapPoints([])
+  	return
+	}
   var newDateRange = d3.event.selection.map(x.invert) || x.domain()
   var filteredData = dataForMap.filter(d => (d.TIME >= newDateRange[0] && d.TIME <= newDateRange[1]) )
   updateMapPoints(filteredData)
@@ -236,8 +259,8 @@ function updateTitleText(newDateArray, filteredData) {
         title.text("Pangolin seizures " + from + " - " + to);
     }
     //update count
-    var total = filteredData.map(d=>+d.ESTNUM).reduce((acc, cur)=>acc+cur)
-    count.text(`${total} Pangolins`)
+    var total = filteredData.map(d=>+d.ESTNUM).reduce((acc, cur)=>acc+cur, 0)
+    count.text(`${Math.round(total)} Pangolins`)
 }
 
 // Updates the points displayed on the map, to those in the passed data array
@@ -286,4 +309,5 @@ function renderChinaHeatmap(china){
       .style('stroke-width', 0.3)
       .style("opacity",0.8)
 }
+
 export default D3MAP
