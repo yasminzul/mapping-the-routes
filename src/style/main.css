@@ -311,13 +311,13 @@ path{
 .vis-title {
   font: 16px 'Open Sans';
   font-weight: bold;
-  fill: #777;
+  fill: white;
 }
 
 .seizure-total{
-	font: 26px 'Open Sans';
+	font: 5em 'Open Sans';
   font-weight: bold;
-  fill: #000;
+  fill: white;
 }
 
 .circle-hover {

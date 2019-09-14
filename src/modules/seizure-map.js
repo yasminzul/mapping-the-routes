@@ -1,35 +1,26 @@
 import * as d3 from 'd3'
 // import * as topojson from 'topojson'
 
-const D3MAP = {}
+const SeizureMap = {}
 const $ = q => document.querySelector(q)
 
-var colorScale = d3.scaleLinear()
-    .domain([0, 58])
-    .range([d3.rgb("#cccccc"), d3.rgb("#08306b")])
-
 var radiusScale = d3.scaleSqrt()
-    .range([2, 15]);
+    .range([5, 25]);
 
 var svg = d3.select("#geo-map-container")
             .append("svg")
             .attr('x', 0)
             .attr('y', 0)
             .attr('viewBox', '0 0 960 500')
-            .attr('id', 'geo-map');
+            .attr('id', 'geo-map')
+
+var bg = svg.append('rect').attr('width', '100%').attr('height', '100%').attr('fill', '#3b3b3b')
 
 var g_world = svg.append("g")
     							.attr("class", "countries")
 
-var g_china = svg.append('g')
-    							.attr("class", "china-provinces")
-
-var groups = [g_world, g_china]
-
-var width = $("#geo-map-container").offsetWidth
-var height = $("#geo-map-container").offsetHeight
 var projection = d3.geoMercator()
-                   .scale(130) //130 show full map, default 150
+                   .scale(150) //130 show full map, default 150
                    // .translate([width / 2, height / 1.5]);
 
 //path generator: convert geojson feature to svg path
@@ -37,22 +28,30 @@ var path = d3.geoPath().projection(projection);
 
 var title = svg.append("text")
 	    .attr("class", "vis-title")
-	    .attr("transform", "translate(" + 50 + "," + 480 + ")")
-	    .text("# Pangolins (select a time range)");
-var count = svg.append("text")
+	    .attr("transform", "translate(" + 50 + "," + 460 + ")")
+      .text('pangolin trafficked')
+
+var range = title.append('tspan').attr('x', 0).attr('dy', '1.3em')
+	    .text("(select a time range)");
+
+//add red bg
+var count_bg = svg.append('rect')
+      .attr("transform", "translate(" + 40 + "," + 420 + ")")
+      .attr('fill', 'red')
+
+var count_text =  svg.append("text")
+      .attr("transform", "translate(" + 50 + "," + 420 + ")")
 	    .attr("class", "seizure-total")
-	    .attr("transform", "translate(" + 50 + "," + 430 + ")")
-	    .text("0 Pangolins");
+	    .text("0");
 
 //timeline svg and g init
 var timelineSvg = d3.select("#timeline-container").append("svg")
 var timeline = timelineSvg.append("g").attr("class", "timeline")
 var bursh_g = timeline.append("g").attr("class", "brush")
 
-D3MAP.renderMap = function(){
+SeizureMap.renderMap = function(){
 	Promise.all([
 	    d3.json("assets/maps/world_countries.json"),
-	    // d3.json("assets/maps/china.json"),
 	    d3.csv("assets/data/valid-seizure-num-date.csv")
 	])
 	.then(ready)
@@ -62,7 +61,6 @@ D3MAP.renderMap = function(){
 
 	function ready(values) {
 		var [world, seizures] = values
-		// renderChinaHeatmap(china)
 		// timeline map reference: https://bl.ocks.org/domhorvath/dd850c5e97d4022fbf0f11611a0cf528
 		var parseDate = d3.timeParse('%Y-%m-%d %H:%M:%S')
 
@@ -110,44 +108,10 @@ D3MAP.renderMap = function(){
 	    .data(world.features)
 	    .enter().append("path")
 	      .attr("d", path)
-	      .style("fill", '#ccc')
-	      .style('stroke', 'white')
-	      .style('stroke-width', 1.5)
+	      .style("fill", '#694b2d')
+	      .style('stroke', '#3b3b3b')
+	      .style('stroke-width', 0.5)
 	      .style("opacity",0.8)
-	      // tooltips
-	        .style("stroke","white")
-	        .style('stroke-width', 0.3)
-	        .on('mouseover',function(d){
-	          d3.select(this)
-	            .style("opacity", 1)
-	            .style("stroke","white")
-	            .style("stroke-width",1);
-	        })
-	        .on('mouseout', function(d){
-	          d3.select(this)
-	            .style("opacity", 0.8)
-	            .style("stroke","white")
-	            .style("stroke-width",0.3);
-	        });
-	}
-
-	// zoom and pan , helper for now as munual zoom, confirm location of programatic zoom
-	var zoom = d3.zoom()
-    .on("zoom",function() {
-      groups.forEach(g => {
-      	g.attr("transform",d3.event.transform)
-      })
-      // console.log(d3.event.transform)
-  	});
-
-	// svg.call(zoom)
-
-	function panZoom(transform){
-		var {k, x, y} = transform
-		groups.forEach(g => {
-    	g.attr("transform",`translate(${x}, ${y}) scale(${k})`)
-    })
-    return g_world.attr('transform')
 	}
 }
 
@@ -195,9 +159,9 @@ function makeTimeline(dataForMap, dataForTimeline) {
  	timeline.append("g")
  			.attr("class", "bars")
  			.selectAll('rect')
- 			.data(bar_data, function(d){return d.TIME.getFullYear()})
+ 			.data(bar_data, function(d){return d.id})
  			.enter().append('rect').attr("class", 'bar')
- 			.style('fill', 'steelblue')
+ 			.style('fill', "#dcba7d")
  			.attr('x', function(d){return x(d.TIME)})
  			.attr('width', (Math.round(w / 20) - 10)+'px')
  			.attr('y', function(d){return y(d.TOTAL)})
@@ -248,7 +212,7 @@ function brushCallback(dataForMap, x) {
 // Updates the vis title text to include the passed date array: [start Date, end Date]
 function updateTitleText(newDateArray, filteredData) {
     if (!newDateArray) {
-        title.text("Pangolin seizures (select a time range)");
+        range.text("Pangolin seizures (select a time range)");
     } else {
         var from = (newDateArray[0].getMonth() + 1) + "/" +
                    (newDateArray[0].getDay() + 1) + "/" +
@@ -256,21 +220,26 @@ function updateTitleText(newDateArray, filteredData) {
             to =   (newDateArray[1].getMonth() + 1) + "/" +
                    (newDateArray[1].getDay() + 1) + "/" +
                    newDateArray[1].getFullYear();
-        title.text("Pangolin seizures " + from + " - " + to);
+        range.text(from + " - " + to);
     }
     //update count
     var total = filteredData.map(d=>+d.ESTNUM).reduce((acc, cur)=>acc+cur, 0)
-    count.text(`${Math.round(total)} Pangolins`)
+    count_text.text(`${d3.format(',')(Math.round(total))}`)
+    count_bg
+      .attr('x', count_text.node().getBBox().x)
+      .attr('y', count_text.node().getBBox().y)
+      .attr('width', +count_text.node().getBBox().width + 20)
+      .attr('height', '6.5em')
 }
 
 // Updates the points displayed on the map, to those in the passed data array
 function updateMapPoints(data) {
-    var circles = svg.selectAll("circle").data(data, function(d) { return d.TIME + d.ESTNUM; });
+    var circles = svg.selectAll("circle").data(data, function(d) { return d.id });
 
     circles // update existing points
         // .on("mouseover", tipMouseover)
         // .on("mouseout", tipMouseout)
-        .attr("fill", "rgba(0, 0, 255, 0.3)")
+        .attr("fill", "rgba(201, 62, 62, 0.3)")        
         .attr("cx", function(d) { return projection([+d.Longitude, +d.Latitude])[0]; })
         .attr("cy", function(d) { return projection([+d.Longitude, +d.Latitude])[1]; })
         .attr("r",  function(d) { return radiusScale(+d.ESTNUM); });
@@ -278,7 +247,7 @@ function updateMapPoints(data) {
     circles.enter().append("circle") // new entering points
         // .on("mouseover", tipMouseover)
         // .on("mouseout", tipMouseout)
-        .attr("fill", "rgba(0, 0, 255, 0.3)")
+        .attr("fill", "rgba(240, 135, 24, 0.3)")
         .attr("cx", function(d) { return projection([+d.Longitude, +d.Latitude])[0]; })
         .attr("cy", function(d) { return projection([+d.Longitude, +d.Latitude])[1]; })
         .attr("r",  0)
@@ -293,21 +262,4 @@ function updateMapPoints(data) {
         .attr("r", 0).remove();
 };
 
-function renderChinaHeatmap(china){
-  var china_province_data = [{'name': '上海', 'value': 4},{'name': '云南', 'value': 3},{'name': '内蒙古', 'value': 17},{'name': '北京', 'value': 17},{'name': '吉林', 'value': 58},{'name': '四川', 'value': 4},{'name': '天津', 'value': 17},{'name': '安徽', 'value': 3},{'name': '山东', 'value': 10},{'name': '山西', 'value': 18},{'name': '广东', 'value': 4},{'name': '广西', 'value': 1},{'name': '新疆', 'value': 1},{'name': '江苏', 'value': 3},{'name': '江西', 'value': 6},{'name': '河北', 'value': 22},{'name': '河南', 'value': 20},{'name': '浙江', 'value': 5},{'name': '湖北', 'value': 7},{'name': '湖南', 'value': 3},{'name': '甘肃', 'value': 5},{'name': '贵州', 'value': 7},{'name': '辽宁', 'value': 26},{'name': '重庆', 'value': 2},{'name': '陕西', 'value': 7},{'name': '青海', 'value': 3},{'name': '黑龙江', 'value': 28}]
-  var values_by_province = {}
-  china_province_data.forEach(d => { values_by_province[d.name] = +d.value; });
-  china.features.forEach(d => {d.value = values_by_province[d.properties.name] || 0})
-
-	g_china
-    .selectAll("path")
-    .data(china.features)
-    .enter().append("path")
-      .attr("d", path)
-      .style("fill", function(d){ return colorScale(d.value) })
-      .style('stroke', 'white')
-      .style('stroke-width', 0.3)
-      .style("opacity",0.8)
-}
-
-export default D3MAP
+export default SeizureMap
