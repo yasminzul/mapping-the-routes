@@ -47,7 +47,12 @@ var count_text =  svg.append("text")
 //timeline svg and g init
 var timelineSvg = d3.select("#timeline-container").append("svg")
 var timeline = timelineSvg.append("g").attr("class", "timeline")
-var bursh_g = timeline.append("g").attr("class", "brush")
+// var bursh_g = timeline.append("g").attr("class", "brush")
+
+// tooltips
+var bartip = d3.select('.container').append('div')
+    .attr('class', 'bartip')
+    .style('display', 'none');
 
 SeizureMap.renderMap = function(){
 	Promise.all([
@@ -69,6 +74,7 @@ SeizureMap.renderMap = function(){
 
 	  var dataForMap = seizures.map(function(d, idx) {
 	      d.TIME = parseDate(d['Date']);
+        d.YEAR = d.TIME.getFullYear() //Seizure year, not the same as 'Year' in original
 	      d.ESTNUM = +d['ESTNUM'];
 	      d.Latitude = +d['Latitude'];
 	      d.Longitude = +d['Longitude'];
@@ -80,7 +86,7 @@ SeizureMap.renderMap = function(){
 	      }
 	      return d
 	  });
-	  
+
 	  Object.keys(dateCount).forEach(function(time) {
       dataForTimeline.push({ TIME: new Date(time), ESTNUM: dateCount[time] });
     });
@@ -89,19 +95,7 @@ SeizureMap.renderMap = function(){
     radiusScale.domain(d3.extent(dataForMap, function(d) { return +d.ESTNUM; }));
 
     makeTimeline(dataForMap, dataForTimeline);
-
-		var seizure_data_by_country = {}
-		seizures.forEach(d => seizure_data_by_country[d.Country] = d)
-
-		//match countries names
-		for (name in seizure_data_by_country) {
-			if (world.features.find(d => d.properties.name == name)) {
-
-			}
-			else {
-				console.log(name)
-			}
-		}
+    autoplay(dataForMap)
 
 		g_world
 	    .selectAll("path")
@@ -165,7 +159,22 @@ function makeTimeline(dataForMap, dataForTimeline) {
  			.attr('x', function(d){return x(d.TIME)})
  			.attr('width', (Math.round(w / 20) - 10)+'px')
  			.attr('y', function(d){return y(d.TOTAL)})
- 			.attr("height", function(d) { return h - y(d.TOTAL); });
+ 			.attr("height", function(d) { return h - y(d.TOTAL); })
+      .on('mouseover', function (){
+        bartip.style('display', 'inline');
+        d3.select(this).style('opacity', 0.5)
+      })
+      .on('mousemove', function (d){
+        bartip
+          .html(d.TIME.getFullYear() + '<hr/>' + d.TOTAL)
+          .style('left', (d3.event.pageX - 34) + 'px')
+          .style('top', (d3.event.pageY - 12) + 'px');
+      })
+      .on('mouseout', function (){
+        bartip.style('display', 'none');
+        d3.select(this).style('opacity', 1)
+      })
+
 
   timeline.append("g")
       .attr("class", "x axis")
@@ -185,29 +194,29 @@ function makeTimeline(dataForMap, dataForTimeline) {
 
   // Add brush to timeline, hook up to callback\
   //brush reference: http://rajvansia.com/scatterplotbrush-d3-v4.html
-  var brush = d3.brushX()
-      .extent([[0, 0], [w, h]]) // brushable area
-      .on("brush end", function() { brushCallback(dataForMap, x); })
-  var initial_range = [new Date(2000, 1, 1), new Date(2001, 12, 31)].map(x)
+  // var brush = d3.brushX()
+  //     .extent([[0, 0], [w, h]]) // brushable area
+  //     .on("brush end", function() { brushCallback(dataForMap, x); })
+  // var initial_range = [new Date(2000, 1, 1), new Date(2001, 12, 31)].map(x)
   
-  bursh_g
-      .call(brush)
-			.call(brush.move, initial_range)
+  // bursh_g
+  //     .call(brush)
+  //   	 .call(brush.move, initial_range)
 };
 
 // Called whenever the timeline brush range (extent) is updated
 // Filters the map data to those points that fall within the selected timeline range
-function brushCallback(dataForMap, x) {
-	if (!d3.event.selection){
-  	updateTitleText(null, []);
-  	updateMapPoints([])
-  	return
-	}
-  var newDateRange = d3.event.selection.map(x.invert) || x.domain()
-  var filteredData = dataForMap.filter(d => (d.TIME >= newDateRange[0] && d.TIME <= newDateRange[1]) )
-  updateMapPoints(filteredData)
-  updateTitleText(newDateRange, filteredData);
-}
+// function brushCallback(dataForMap, x) {
+// 	if (!d3.event.selection){
+//   	updateTitleText(null, []);
+//   	updateMapPoints([])
+//   	return
+// 	}
+//   var newDateRange = d3.event.selection.map(x.invert) || x.domain()
+//   var filteredData = dataForMap.filter(d => (d.TIME >= newDateRange[0] && d.TIME <= newDateRange[1]) )
+//   updateMapPoints(filteredData)
+//   updateTitleText(newDateRange, filteredData);
+// }
 
 // Updates the vis title text to include the passed date array: [start Date, end Date]
 function updateTitleText(newDateArray, filteredData) {
@@ -233,20 +242,14 @@ function updateTitleText(newDateArray, filteredData) {
 }
 
 // Updates the points displayed on the map, to those in the passed data array
-function updateMapPoints(data) {
+function updateMapPoints(data, year) {
     var circles = svg.selectAll("circle").data(data, function(d) { return d.id });
 
-    circles // update existing points
-        // .on("mouseover", tipMouseover)
-        // .on("mouseout", tipMouseout)
-        .attr("fill", "rgba(201, 62, 62, 0.3)")        
-        .attr("cx", function(d) { return projection([+d.Longitude, +d.Latitude])[0]; })
-        .attr("cy", function(d) { return projection([+d.Longitude, +d.Latitude])[1]; })
-        .attr("r",  function(d) { return radiusScale(+d.ESTNUM); });
+    if (year == "2000") { //reset
+      svg.selectAll("circle").remove()
+    }
 
     circles.enter().append("circle") // new entering points
-        // .on("mouseover", tipMouseover)
-        // .on("mouseout", tipMouseout)
         .attr("fill", "rgba(240, 135, 24, 0.3)")
         .attr("cx", function(d) { return projection([+d.Longitude, +d.Latitude])[0]; })
         .attr("cy", function(d) { return projection([+d.Longitude, +d.Latitude])[1]; })
@@ -256,10 +259,35 @@ function updateMapPoints(data) {
         .attr("r",  function(d) { return radiusScale(+d.ESTNUM); });
 
     circles.exit() // exiting points
-        .attr("r",  function(d) { return radiusScale(+d.ESTNUM); })
       .transition()
         .duration(500)
-        .attr("r", 0).remove();
+        .attr("fill", "rgba(201, 62, 62, 0.3)")
 };
+
+function autoplay(data){
+  var years = []
+  data.map(d=> {
+    if (years.indexOf(d.YEAR) < 0) years.push(d.YEAR)
+  })
+  var curr_idx = 0
+  var changeYear = function(){
+    var curr_year = years[curr_idx % years.length]
+    var yearData = data.filter(d=>d.YEAR == curr_year)
+    updateMapPoints(yearData, curr_year)
+    curr_idx += 1
+
+    //update range 
+    range.text("2000 - " + curr_year);
+    //update count
+    var total = data.filter(d=> +d.YEAR <= curr_year).map(d=>d.ESTNUM).reduce((acc, cur)=> acc + cur, 0)
+    count_text.text(`${d3.format(',')(Math.round(total))}`)
+    count_bg
+      .attr('x', count_text.node().getBBox().x)
+      .attr('y', count_text.node().getBBox().y)
+      .attr('width', +count_text.node().getBBox().width + 20)
+      .attr('height', '6.5em')
+  }
+  return setInterval(changeYear, 1000)
+}
 
 export default SeizureMap
