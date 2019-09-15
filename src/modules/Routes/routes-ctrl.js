@@ -9,12 +9,12 @@ const $ = q => document.querySelector(q)
 
 const Malaysia = {
 	jpgs: [
-		'assets/maps/Malaysia/JPG/Malaysia map-01.png',
-		'assets/maps/Malaysia/JPG/Malaysia map-02.jpg',
-		'assets/maps/Malaysia/JPG/Malaysia map-03.jpg',
-		'assets/maps/Malaysia/JPG/Malaysia map-04.jpg',
-		'assets/maps/Malaysia/JPG/Malaysia map-05.jpg',
-		'assets/maps/Malaysia/JPG/Malaysia map-06.jpg',
+		'assets/maps/Malaysia/IMG/map-01.jpg',
+		'assets/maps/Malaysia/IMG/map-02.jpg',
+		'assets/maps/Malaysia/IMG/map-03.jpg',
+		'assets/maps/Malaysia/IMG/map-04.jpg',
+		'assets/maps/Malaysia/IMG/map-05.jpg',
+		'assets/maps/Malaysia/IMG/map-06.jpg',
 	],
 	maps: [
 		$('#malaysia-routes-1'),

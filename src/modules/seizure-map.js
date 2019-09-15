@@ -251,7 +251,7 @@ function updateMapPoints(data, year) {
     }
 
     circles.enter().append("circle") // new entering points
-        .attr("fill", "rgba(240, 135, 24, 0.3)")
+        .attr("fill", "rgba(201, 62, 62, 0.3)")
         .attr("cx", function(d) { return projection([+d.Longitude, +d.Latitude])[0]; })
         .attr("cy", function(d) { return projection([+d.Longitude, +d.Latitude])[1]; })
         .attr("r",  0)
@@ -262,7 +262,7 @@ function updateMapPoints(data, year) {
     circles.exit() // exiting points
       .transition()
         .duration(500)
-        .attr("fill", "rgba(201, 62, 62, 0.3)")
+        .attr("fill", "rgba(240, 135, 24, 0.3)")        
 };
 
 function initAutoPlayCtrl(data) {
@@ -273,11 +273,16 @@ function initAutoPlayCtrl(data) {
   new ScrollMagic.Scene({ triggerElement: $('#geo-map-container'), duration: $('#geo-map-container').offsetHeight})
     .on('enter', function () {
       console.log('enter map')
+      svg.selectAll("circle").remove() // clear final screen circles
       interval = autoplay(data, stage)
     })
     .on('leave', function () {
       console.log('leave map')
       clearInterval(interval)
+      //render final screen
+      svg.selectAll("circle").remove()
+      updateMapPoints(data)
+      updateLabels(data, 2019)
     })
     .addTo(controller);
 } 
@@ -292,19 +297,22 @@ function autoplay(data, stage){
     var yearData = data.filter(d=>d.YEAR == curr_year)
     updateMapPoints(yearData, curr_year)
     stage.curr_idx = (stage.curr_idx + 1) % years.length
-
-    //update range 
-    range.text("2000 - " + curr_year);
-    //update count
-    var total = data.filter(d=> +d.YEAR <= curr_year).map(d=>d.ESTNUM).reduce((acc, cur)=> acc + cur, 0)
-    count_text.text(`${d3.format(',')(Math.round(total))}`)
-    count_bg
-      .attr('x', count_text.node().getBBox().x)
-      .attr('y', count_text.node().getBBox().y)
-      .attr('width', +count_text.node().getBBox().width + 20)
-      .attr('height', '6.5em')
+    updateLabels(data, curr_year)
   }
   return setInterval(changeYear, 1000)
+}
+
+function updateLabels(data, curr_year){
+  //update range 
+  range.text("2000 - " + curr_year);
+  //update count
+  var total = data.filter(d=> +d.YEAR <= curr_year).map(d=>d.ESTNUM).reduce((acc, cur)=> acc + cur, 0)
+  count_text.text(`${d3.format(',')(Math.round(total))}`)
+  count_bg
+    .attr('x', count_text.node().getBBox().x)
+    .attr('y', count_text.node().getBBox().y)
+    .attr('width', +count_text.node().getBBox().width + 20)
+    .attr('height', '6.5em')
 }
 
 export default SeizureMap

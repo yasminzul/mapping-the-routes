@@ -68,3 +68,6 @@ dist/
 
 #exclude cpanel config
 cpanel/
+
+#raw pictures
+src/public/assets/images/Edited/
