@@ -51,9 +51,21 @@ Malaysia.SceneCtrl = () => {
 				  changeBg(Malaysia.maps[0], Malaysia.jpgs[obj.curImg])// set the image source
 				}
 			}), 0)
-		.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 1, ease:Linear.easeNone}), 0.5)
+		//map 1 part 1
+		.add(TweenMax.to($('#arrows'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0)
+		.add(TweenMax.to($('#melaka-label'), 0.2, {opacity: 1, ease:Linear.easeNone}), 0.2)
+		.add(TweenMax.to($('#caption01'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0.2)
 
-  new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: 500})
+
+		.add(TweenMax.to($('#arrows'), 0.2, {opacity: 0, ease:Linear.easeNone}), 0.3)
+		.add(TweenMax.to($('#melaka-label'), 0.1, {opacity: 0, ease:Linear.easeNone}), 0.4)
+		.add(TweenMax.to($('#caption01'), 0.1, {opacity: 0, ease:Linear.easeNone}), 0.4)
+
+		//map1 part 2
+		.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 1, ease:Linear.easeNone}), 0.5)
+		.add(TweenMax.to($('#forest-label'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0.7)
+
+  new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: 700})
     .setTween(tween)
     .on('enter', function(){
     	this.setPin(this.triggerElement())
