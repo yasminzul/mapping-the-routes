@@ -14,6 +14,8 @@ import Subscribe from './modules/subscribe.js'
 
 import SeizureMap from './modules/seizure-map.js'
 
+import RoutesCtrl from './modules/Routes/routes-ctrl.js'
+
 // Map.initMap()
 // Map.initScrollController()
 // Map.initTooltip()

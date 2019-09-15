@@ -241,16 +241,6 @@ body {
 }
 /*component*/
 
-/*snazzy map*/
-.snazzy{
-	width: 100vw;
-	height: auto;
-	margin-left: -15px;
-	margin-right: -15px;
-	background-size: cover;
-}
-/*snazzy map*/
-
 /*animated map svg v1 [deprecated]*/
 /*map container is pinned as position: fixed, margin won't apply*/
 #map-container{
@@ -358,3 +348,24 @@ path{
   color         : white;
   pointer-events: none;
 }
+
+/*snazzy map*/
+.snazzy{
+	width: 100vw;
+	height: auto;
+	margin-left: -15px;
+	margin-right: -15px;
+	background-size: cover;
+	position: relative;
+}
+
+.routes-svg, .routes-bg{
+	width: 100%;
+}
+
+.routes-bg{
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+/*snazzy map*/

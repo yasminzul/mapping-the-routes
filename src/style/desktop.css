@@ -56,7 +56,7 @@
 
 	.scrollmagic-pin-spacer {
 		margin: 0 -25vw !important;
-		padding-left: 25vw !important;
+		/*padding-left: 25vw !important;*/
 	}
   /*animated map svg v1 [deprecated]*/
 }

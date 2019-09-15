@@ -289,7 +289,6 @@ function autoplay(data, stage){
   })
   var changeYear = function(){
     var curr_year = years[stage.curr_idx]
-    console.log(curr_year)
     var yearData = data.filter(d=>d.YEAR == curr_year)
     updateMapPoints(yearData, curr_year)
     stage.curr_idx = (stage.curr_idx + 1) % years.length
