@@ -1,30 +1,30 @@
 import './style/main.css'
 import './style/desktop.css'
-
 import './style/tooltip.css'
-// import Map from './modules/map.js'
-
 import './style/progress-bar.css'
-import ProgressBar from './modules/progress-bar.js'
-
-import Hash from './modules/url-hash.js'
-
 import './style/overlay.css'
+
+import ProgressBar from './modules/progress-bar.js'
+import Hash from './modules/url-hash.js'
 import Subscribe from './modules/subscribe.js'
-
 import SeizureMap from './modules/seizure-map.js'
-
 import RoutesCtrl from './modules/Routes/routes-ctrl.js'
+
+// import Map from './modules/map.js'
 
 // Map.initMap()
 // Map.initScrollController()
 // Map.initTooltip()
 
-ProgressBar.initScrollController()
-ProgressBar.initClickNav()
+window.addEventListener('DOMContentLoaded', () => {
+	ProgressBar.initScrollController()
+	ProgressBar.initClickNav()
 
-Hash.initHashController()
+	Hash.initHashController()
 
-Subscribe.initBookmark()
+	Subscribe.initBookmark()
 
-SeizureMap.renderMap()
+	SeizureMap.renderMap()
+
+	RoutesCtrl.init()
+});

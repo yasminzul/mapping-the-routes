@@ -6,15 +6,26 @@ import * as d3 from 'd3'
 import 'debug.addIndicators'
 
 const $ = q => document.querySelector(q)
+const IMG = 'assets/maps/Malaysia/IMG/'
+const SVG = 'assets/maps/Malaysia/SVG/'
 
 const Malaysia = {
 	jpgs: [
-		'assets/maps/Malaysia/IMG/map-01.jpg',
-		'assets/maps/Malaysia/IMG/map-02.jpg',
-		'assets/maps/Malaysia/IMG/map-03.jpg',
-		'assets/maps/Malaysia/IMG/map-04.jpg',
-		'assets/maps/Malaysia/IMG/map-05.jpg',
-		'assets/maps/Malaysia/IMG/map-06.jpg',
+		`${IMG}map-01.jpg`,
+		`${IMG}map-02.jpg`,
+		`${IMG}map-03.jpg`,
+		`${IMG}map-04.jpg`,
+		`${IMG}map-05.jpg`,
+		`${IMG}map-06.jpg`,
+	],
+	svgs:[
+		`${SVG}Malaysia map-01.svg`,
+		`${SVG}Malaysia map-02.svg`,
+		`${SVG}Malaysia map-03.svg`,
+		`${SVG}Malaysia map-04.svg`,
+		`${SVG}Malaysia map-05.svg`,
+		`${SVG}Malaysia map-06.svg`,
+		`${SVG}Malaysia map-07.svg`,
 	],
 	maps: [
 		$('#malaysia-routes-1'),
@@ -39,8 +50,8 @@ Malaysia.SceneCtrl = () => {
 				onUpdate: function () {
 				  changeBg(Malaysia.maps[0], Malaysia.jpgs[obj.curImg])// set the image source
 				}
-			}
-		), 0)
+			}), 0)
+		.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 1, ease:Linear.easeNone}), 0.5)
 
   new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: 500})
     .setTween(tween)
@@ -55,4 +66,8 @@ function changeBg($map, src){
 	$map.querySelector('.routes-bg').src = src
 }
 
-Malaysia.SceneCtrl()
+const init = () => {
+	Malaysia.SceneCtrl()
+}
+
+export default { init }

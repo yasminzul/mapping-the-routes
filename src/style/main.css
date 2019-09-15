@@ -44,6 +44,18 @@ body {
 	color: #dcba7d;
 }
 
+a {
+	color: black;
+	text-decoration: underline;
+	text-decoration-color: #dcba7d;
+	transition: all .3s ease-in-out;
+}
+
+a:hover {
+	color: white;
+	background: #dcba7d;
+}
+
 .header{
 	width: 100vw;
 	height: 100vh;
