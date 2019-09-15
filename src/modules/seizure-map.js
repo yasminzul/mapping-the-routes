@@ -1,4 +1,6 @@
 import * as d3 from 'd3'
+import ScrollMagic from 'ScrollMagic'
+import 'debug.addIndicators'
 // import * as topojson from 'topojson'
 
 const SeizureMap = {}
@@ -95,7 +97,7 @@ SeizureMap.renderMap = function(){
     radiusScale.domain(d3.extent(dataForMap, function(d) { return +d.ESTNUM; }));
 
     makeTimeline(dataForMap, dataForTimeline);
-    autoplay(dataForMap)
+    initAutoPlayCtrl(dataForMap)
 
 		g_world
 	    .selectAll("path")
@@ -263,6 +265,23 @@ function updateMapPoints(data, year) {
         .duration(500)
         .attr("fill", "rgba(201, 62, 62, 0.3)")
 };
+
+function initAutoPlayCtrl(data) {
+  var controller = new ScrollMagic.Controller();
+  var interval = null
+
+  new ScrollMagic.Scene({ triggerElement: $('#geo-map-container'), duration: $('#geo-map-container').offsetHeight})
+    .on('enter', function () {
+      console.log('enter map')
+      interval = autoplay(data)
+    })
+    .on('leave', function () {
+      console.log('leave map')
+      clearInterval(interval)
+    })
+    .addIndicators()
+    .addTo(controller);
+} 
 
 function autoplay(data){
   var years = []
