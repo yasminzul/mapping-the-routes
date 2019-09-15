@@ -1,6 +1,7 @@
 import TweenMax from 'TweenMax'
 import ScrollMagic from 'ScrollMagic'
 import 'animation.gsap'
+import * as d3 from 'd3'
 
 import 'debug.addIndicators'
 
@@ -27,22 +28,25 @@ Malaysia.SceneCtrl = () => {
 	var obj = {curImg: 0};
 
 	// create tween
-	var tween = TweenMax.to(obj, 0.5,
-		{
-			curImg: 1,	// animate propery curImg to number of images
-			roundProps: "curImg",				// only integers so it can be used as an array index
-			// repeat: 'none',									// repeat 3 times
-			immediateRender: true,			// load first image automatically
-			ease: Linear.easeNone,			// show every image the same ammount of time
-			onUpdate: function () {
-			  changeBg(Malaysia.maps[0], Malaysia.jpgs[obj.curImg])// set the image source
+	var tween = new TimelineMax()
+		.add(TweenMax.to(obj, 1,
+			{
+				curImg: 1,	// animate propery curImg to number of images
+				roundProps: "curImg",				// only integers so it can be used as an array index
+				// repeat: 3,									// repeat 3 times
+				immediateRender: true,			// load first image automatically
+				ease: Linear.easeNone,			// show every image the same ammount of time
+				onUpdate: function () {
+				  changeBg(Malaysia.maps[0], Malaysia.jpgs[obj.curImg])// set the image source
+				}
 			}
-		}
-	);
+		), 0)
 
   new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: 500})
     .setTween(tween)
-    .setPin(Malaysia.maps[0])
+    .on('enter', function(){
+    	this.setPin(this.triggerElement())
+    })
     .addIndicators()
     .addTo(controller);
 }

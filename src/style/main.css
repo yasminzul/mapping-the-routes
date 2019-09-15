@@ -351,8 +351,9 @@ path{
 
 /*snazzy map*/
 .snazzy{
+	/*960 : 540*/
 	width: 100vw;
-	height: auto;
+	height: 56.25vw;
 	margin-left: -15px;
 	margin-right: -15px;
 	background-size: cover;
@@ -363,9 +364,17 @@ path{
 	width: 100%;
 }
 
-.routes-bg{
+.routes-svg{
 	position: absolute;
 	left: 0;
-	right: 0;
+	top: 0;
+}
+
+.routes-bg{
+	position: absolute;
+	display: block;
+	height: auto;
+	left: 0;
+	top: 0;
 }
 /*snazzy map*/
