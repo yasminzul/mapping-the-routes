@@ -1,6 +1,5 @@
 import * as d3 from 'd3'
 import ScrollMagic from 'ScrollMagic'
-import 'debug.addIndicators'
 // import * as topojson from 'topojson'
 
 const SeizureMap = {}
@@ -269,31 +268,31 @@ function updateMapPoints(data, year) {
 function initAutoPlayCtrl(data) {
   var controller = new ScrollMagic.Controller();
   var interval = null
+  var stage = {curr_idx: 0} //record the stage of interval, use object to pass as reference value
 
   new ScrollMagic.Scene({ triggerElement: $('#geo-map-container'), duration: $('#geo-map-container').offsetHeight})
     .on('enter', function () {
       console.log('enter map')
-      interval = autoplay(data)
+      interval = autoplay(data, stage)
     })
     .on('leave', function () {
       console.log('leave map')
       clearInterval(interval)
     })
-    .addIndicators()
     .addTo(controller);
 } 
 
-function autoplay(data){
+function autoplay(data, stage){
   var years = []
   data.map(d=> {
     if (years.indexOf(d.YEAR) < 0) years.push(d.YEAR)
   })
-  var curr_idx = 0
   var changeYear = function(){
-    var curr_year = years[curr_idx % years.length]
+    var curr_year = years[stage.curr_idx]
+    console.log(curr_year)
     var yearData = data.filter(d=>d.YEAR == curr_year)
     updateMapPoints(yearData, curr_year)
-    curr_idx += 1
+    stage.curr_idx = (stage.curr_idx + 1) % years.length
 
     //update range 
     range.text("2000 - " + curr_year);
