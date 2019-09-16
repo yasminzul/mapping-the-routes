@@ -39,8 +39,8 @@ Malaysia.SceneCtrl = () => {
 	var obj = {curImg: 0};
 
 	// create tween
-	var tween = new TimelineMax()
-		.add(TweenMax.to(obj, 1,
+	var tween = new TimelineMax().totalTime(3) //3 sections, each take 1/3 of time
+		.add(TweenMax.to(obj, 3,
 			{
 				curImg: 2,	// animate propery curImg to number of images
 				roundProps: "curImg",				// only integers so it can be used as an array index
@@ -53,17 +53,23 @@ Malaysia.SceneCtrl = () => {
 			}), 0)
 		//map 1 part 1
 		.add(TweenMax.to($('#arrows'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0)
-		.add(TweenMax.to($('#melaka-label'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0.1)
-		.add(TweenMax.to($('#caption01'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0.1)
+		.add(TweenMax.to($('#melaka-label'), 0.4, {opacity: 1, ease:Linear.easeNone}), 0.2)
+		.add(TweenMax.to($('#caption01'), 0.4, {opacity: 1, ease:Linear.easeNone}), 0.2)
 
-
-		.add(TweenMax.to($('#arrows'), 0.2, {opacity: 0, ease:Linear.easeNone}), 0.3)
-		.add(TweenMax.to($('#melaka-label'), 0.1, {opacity: 0, ease:Linear.easeNone}), 0.4)
-		.add(TweenMax.to($('#caption01'), 0.1, {opacity: 0, ease:Linear.easeNone}), 0.4)
+		.add(TweenMax.to($('#arrows'), 0.2, {opacity: 0, ease:Linear.easeNone}), 0.8)
+		.add(TweenMax.to($('#melaka-label'), 0.2, {opacity: 0, ease:Linear.easeNone}), 0.8)
+		.add(TweenMax.to($('#caption01'), 0.2, {opacity: 0, ease:Linear.easeNone}), 0.8)
 
 		//map1 part 2
-		.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 1, ease:Linear.easeNone}), 0.5)
-		.add(TweenMax.to($('#forest-label'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0.7)
+		.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 1, ease:Linear.easeNone}), 1)
+		.add(TweenMax.to($('#forest-label'), 0.3, {opacity: 1, ease:Linear.easeNone}), 1.2)
+
+		.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 0, ease:Linear.easeNone}), 1.5)
+		.add(TweenMax.to($('#forest-label'), 0.3, {opacity: 0, ease:Linear.easeNone}), 1.7)
+
+		//map1 part 3
+		.add(TweenMax.to($('polyline#thai-border'), 0.3, {strokeDashoffset: 0, ease:Linear.easeNone}), 2)
+		.add(TweenMax.to($('polyline#thai-border'), 0.3, {strokeDashoffset: 0, ease:Linear.easeNone}), 2.3)
 
   new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: '150%', reverse: true})
     .setTween(tween)

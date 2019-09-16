@@ -74,12 +74,23 @@ a:hover {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	position: relative;
+}
+
+#header-video {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  z-index: 0;
 }
 
 .header-container{
 	margin: 0 8%;
 	width: auto;
 	height: auto;
+	z-index: 1;
 }
 
 .header-title{
