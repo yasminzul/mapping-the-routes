@@ -35,47 +35,72 @@ const Malaysia = {
 Malaysia.SceneCtrl = () => {
 	var controller = new ScrollMagic.Controller();
 
-	// TweenMax can tween any property of any object. We use this object to cycle through the array
-	var obj = {curImg: 0};
-
-	// create tween
-	var tween = new TimelineMax().totalTime(3) //3 sections, each take 1/3 of time
-		.add(TweenMax.to(obj, 3,
-			{
-				curImg: 2,	// animate propery curImg to number of images
-				roundProps: "curImg",				// only integers so it can be used as an array index
-				// repeat: 3,									// repeat 3 times
-				immediateRender: true,			// load first image automatically
-				ease: Linear.easeNone,			// show every image the same ammount of time
-				onUpdate: function () {
-				  changeBg(Malaysia.maps[0], Malaysia.jpgs[obj.curImg])// set the image source
-				}
-			}), 0)
-		//map 1 part 1
-		.add(TweenMax.to($('#arrows'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0)
-		.add(TweenMax.to($('#melaka-label'), 0.4, {opacity: 1, ease:Linear.easeNone}), 0.2)
-		.add(TweenMax.to($('#caption01'), 0.4, {opacity: 1, ease:Linear.easeNone}), 0.2)
-
-		.add(TweenMax.to($('#arrows'), 0.2, {opacity: 0, ease:Linear.easeNone}), 0.8)
-		.add(TweenMax.to($('#melaka-label'), 0.2, {opacity: 0, ease:Linear.easeNone}), 0.8)
-		.add(TweenMax.to($('#caption01'), 0.2, {opacity: 0, ease:Linear.easeNone}), 0.8)
-
-		//map1 part 2
-		.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 1, ease:Linear.easeNone}), 1)
-		.add(TweenMax.to($('#forest-label'), 0.3, {opacity: 1, ease:Linear.easeNone}), 1.2)
-
-		.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 0, ease:Linear.easeNone}), 1.5)
-		.add(TweenMax.to($('#forest-label'), 0.3, {opacity: 0, ease:Linear.easeNone}), 1.7)
-
-		//map1 part 3
-		.add(TweenMax.to($('polyline#thai-border'), 0.3, {strokeDashoffset: 0, ease:Linear.easeNone}), 2)
-		.add(TweenMax.to($('polyline#thai-border'), 0.3, {strokeDashoffset: 0, ease:Linear.easeNone}), 2.3)
-
-  new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: '150%', reverse: true})
+	// scroll tween
+	var tween = new TimelineMax()
+		
+  var main_scene = new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: '150%', reverse: true})
     .setTween(tween)
     .on('enter', function(){
     	this.setPin(this.triggerElement())
     })
+    .addIndicators()
+    .addTo(controller);
+
+  var duration = main_scene.duration()
+
+  //auto play tweens
+  var first_scene = new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: 0, reverse: true})
+    .setTween(
+    	new TimelineMax()
+    		.add(TweenMax.to($('#arrows'), 0.5, {opacity: 1, ease:Linear.easeNone}))
+				.add(TweenMax.to($('#melaka-label'), 0.5, {opacity: 1, ease:Linear.easeNone}))
+				.add(TweenMax.to($('#caption01'), 0.5, {opacity: 1, ease:Linear.easeNone}))
+    )
+    .addTo(controller);
+
+  var second_scene = new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: 0, offset: duration / 3, reverse: true})
+    .setTween(
+    	new TimelineMax()
+    		//scene 1 elements exit
+				.add(TweenMax.to($('#arrows'), 0.5, {opacity: 0, ease:Linear.easeNone}), 0)
+				.add(TweenMax.to($('#melaka-label'), 0.5, {opacity: 0, ease:Linear.easeNone}), 0)
+				.add(TweenMax.to($('#caption01'), 0.5, {opacity: 0, ease:Linear.easeNone}), 0)
+				//forest enter
+				.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 1, ease:Linear.easeNone}))
+				.add(TweenMax.to($('#forest-label'), 0.3, {opacity: 1, ease:Linear.easeNone}))
+    )
+    .on('start', function(e){
+    	var dir = e.scrollDirection,
+    			scene = e.target
+    	if (dir == 'FORWARD') {
+    		changeBg(Malaysia.maps[0], Malaysia.jpgs[1])
+    	} else {
+    		changeBg(Malaysia.maps[0], Malaysia.jpgs[0])
+    	}
+    })
+    .addIndicators()
+    .addTo(controller);
+
+  var thrid_scene = new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: 0, offset: duration * 2 / 3, reverse: true})
+    .setTween(
+    	new TimelineMax()
+    		//forest exit
+				.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 0, ease:Linear.easeNone}), 0)
+				.add(TweenMax.to($('#forest-label'), 0.5, {opacity: 0, ease:Linear.easeNone}), 0)
+
+    		.add(TweenMax.to($('polyline#thai-border'), 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
+    		.add(TweenMax.to($('#thai-label'), 0.5, {opacity: 1, ease:Linear.easeNone}))
+    )
+    .on('start', function(e){
+    	var dir = e.scrollDirection,
+    			scene = e.target
+    	if (dir == 'FORWARD') {
+    		changeBg(Malaysia.maps[0], Malaysia.jpgs[2])
+    	} else {
+    		changeBg(Malaysia.maps[0], Malaysia.jpgs[1])
+    	}
+    })
+    .addIndicators()
     .addTo(controller);
 }
 
