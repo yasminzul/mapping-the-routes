@@ -44,7 +44,7 @@
     </div>
   </div>
   <video autoplay muted loop id="header-video" poster="assets/images/header-image-v1.jpg" class="mobile-hidden">
-    <source src="assets/images/pangolinreports_header.mp4" type="video/mp4">
+    <source src="" type="video/mp4">
   </video>
 </div>
 
@@ -340,6 +340,16 @@
 <div style="display: none;">
   <script type="text/javascript">
     <!--//--><![CDATA[//><!--
+      //media query
+      if (window.matchMedia("(min-device-width: 480px)").matches){
+        console.log('header video loaded')
+        var video = document.querySelector('#header-video')
+        var source = document.querySelector('#header-video > source')
+        source.src = "assets/images/pangolinreports_header.mp4"
+        video.load()
+      }
+
+      //preload
       var images = new Array()
       function preload() {
         for (i = 0; i < preload.arguments.length; i++) {
