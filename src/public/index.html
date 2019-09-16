@@ -300,6 +300,29 @@
   </g>
   </defs>
 </svg>
+
+<!-- image preloader -->
+<div style="display: none;">
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+      var images = new Array()
+      function preload() {
+        for (i = 0; i < preload.arguments.length; i++) {
+          images[i] = new Image()
+          images[i].src = preload.arguments[i]
+        }
+      }
+      preload(
+        'assets/maps/Malaysia/IMG/map-01.jpg',
+        'assets/maps/Malaysia/IMG/map-02.jpg',
+        'assets/maps/Malaysia/IMG/map-03.jpg',
+        'assets/maps/Malaysia/IMG/map-04.jpg',
+        'assets/maps/Malaysia/IMG/map-05.jpg',
+        'assets/maps/Malaysia/IMG/map-06.jpg',
+      )
+    //--><!]]>
+  </script>
+</div>
 </body>
 
 </html>

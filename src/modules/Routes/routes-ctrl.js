@@ -42,7 +42,7 @@ Malaysia.SceneCtrl = () => {
 	var tween = new TimelineMax()
 		.add(TweenMax.to(obj, 1,
 			{
-				curImg: 1,	// animate propery curImg to number of images
+				curImg: 2,	// animate propery curImg to number of images
 				roundProps: "curImg",				// only integers so it can be used as an array index
 				// repeat: 3,									// repeat 3 times
 				immediateRender: true,			// load first image automatically
@@ -53,8 +53,8 @@ Malaysia.SceneCtrl = () => {
 			}), 0)
 		//map 1 part 1
 		.add(TweenMax.to($('#arrows'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0)
-		.add(TweenMax.to($('#melaka-label'), 0.2, {opacity: 1, ease:Linear.easeNone}), 0.2)
-		.add(TweenMax.to($('#caption01'), 0.2, {opacity: 1, ease:Linear.easeNone}), 0.2)
+		.add(TweenMax.to($('#melaka-label'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0.1)
+		.add(TweenMax.to($('#caption01'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0.1)
 
 
 		.add(TweenMax.to($('#arrows'), 0.2, {opacity: 0, ease:Linear.easeNone}), 0.3)
@@ -65,12 +65,11 @@ Malaysia.SceneCtrl = () => {
 		.add(TweenMax.to($('#forest-fill'), 0.5, {opacity: 1, ease:Linear.easeNone}), 0.5)
 		.add(TweenMax.to($('#forest-label'), 0.3, {opacity: 1, ease:Linear.easeNone}), 0.7)
 
-  new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: 700, reverse: true})
+  new ScrollMagic.Scene({ triggerElement: Malaysia.maps[0], triggerHook:'onLeave', duration: '150%', reverse: true})
     .setTween(tween)
     .on('enter', function(){
     	this.setPin(this.triggerElement())
     })
-    .addIndicators()
     .addTo(controller);
 }
 
