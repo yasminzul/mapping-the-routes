@@ -63,7 +63,7 @@ Malaysia.MapCtrl1 = () => {
 				.add(TweenMax.to([
 					$('#arrows'), $('#melaka-label'), $('#caption01')
 					], 0.5, hidden_opt), 0)
-				
+
 				//forest enter
 				.add(TweenMax.to($('#forest-fill'), 0.5, visiable_opt))
 				.add(TweenMax.to($('#forest-label'), 0.3, visiable_opt))
@@ -99,7 +99,6 @@ Malaysia.MapCtrl1 = () => {
     		changeBg(map, Malaysia.jpgs[1])
     	}
     })
-    .addIndicators()
     .addTo(controller);
 
   var north_route_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration / 2, offset: duration / 2, reverse: true})
@@ -109,14 +108,32 @@ Malaysia.MapCtrl1 = () => {
   			.add(TweenMax.to([
   				$('#bukit-text'), $('#marker-bukit')
   				], 0.2, visiable_opt), 1)
+  			.addCallback(()=>{
+  				pulseMarker([
+  					$('#marker-bukit'),
+  				])
+  			}, 1.2)
 
   			.add(TweenMax.to([
   				$('#marker-rantau'), $('#marker-padang'), $('#padang-text'), $('#rantau-text')
   				], 0.2, visiable_opt), 1.2)
-  			// .add(TweenMax.to($('#marker-padang'), 0.2, visiable_opt), 1.2)
+  			.addCallback(()=>{
+  				pulseMarker([
+  					$('#marker-rantau'),
+  					$('#marker-padang'),
+  				])
+  			}, 1.4)
   	)
   	.addIndicators()
     .addTo(controller);
+}
+
+function pulseMarker(markers){
+	var inners = markers.map(item=>item.querySelector('.marker-inner'))
+	var outters = markers.map(item=>item.querySelector('.marker-outter'))
+
+	TweenMax.fromTo(inners, 3, {attr:{r: 12.06}}, {attr:{r: 20}}).repeat(-1)//.yoyo(true)
+	TweenMax.fromTo(outters, 3, {attr:{r: 20}, opacity: 0.6}, {attr:{r: 55.68}, opacity: 0.2}).repeat(-1)
 }
 
 function changeBg($map, src){
