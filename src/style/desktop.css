@@ -16,7 +16,11 @@
   }
 
   .header-container{
-		margin: 0 20%;
+		margin: 0 28% 0 12%;
+	}
+
+	.header-title{
+		font-size: 7vw;
 	}
 
 	.nav {

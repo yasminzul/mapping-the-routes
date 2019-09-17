@@ -96,6 +96,7 @@ a:hover {
 	width: auto;
 	height: auto;
 	z-index: 1;
+	padding-bottom: 20vh;	
 }
 
 .header-title{
