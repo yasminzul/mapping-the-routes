@@ -46,27 +46,30 @@ Malaysia.MapCtrl1 = () => {
 
   var duration = main_scene.duration()
 
-  //auto play tweens
-  var first_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: 0, reverse: true})
-    .setTween(
-    	new TimelineMax()
-    		.add(TweenMax.to($('#arrows'), 0.5, visiable_opt))
-				.add(TweenMax.to($('#melaka-label'), 0.5, visiable_opt))
-				.add(TweenMax.to($('#caption01'), 0.5, visiable_opt))
+  var first_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration / 4, reverse: true})
+    .on('enter', () =>
+      new TimelineMax()
+        .add(TweenMax.to($('#arrows'), 0.5, visiable_opt))
+        .add(TweenMax.to($('#melaka-label'), 0.5, visiable_opt))
+        .add(TweenMax.to($('#caption01'), 0.5, visiable_opt))
+    )
+    .on('leave', () => 
+      TweenMax.to([
+        $('#arrows'), $('#melaka-label'), $('#caption01')
+      ], 0.5, hidden_opt)
     )
     .addTo(controller);
 
-  var second_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: 0, offset: duration / 4, reverse: true})
-    .setTween(
+  var second_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration / 4, offset: duration / 4, reverse: true})
+    .on('enter', () =>
     	new TimelineMax()
-    		//scene 1 elements exit
-				.add(TweenMax.to([
-					$('#arrows'), $('#melaka-label'), $('#caption01')
-					], 0.5, hidden_opt), 0)
-
-				//forest enter
 				.add(TweenMax.to($('#forest-fill'), 0.5, visiable_opt))
 				.add(TweenMax.to($('#forest-label'), 0.3, visiable_opt))
+    )
+    .on('leave', () =>
+      TweenMax.to([
+        $('#forest-fill'), $('#forest-label')
+      ], 0.5, hidden_opt)
     )
     .on('start', function(e){
     	var dir = e.scrollDirection,
@@ -79,52 +82,46 @@ Malaysia.MapCtrl1 = () => {
     })
     .addTo(controller);
 
-  var thrid_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: 0, offset: duration / 2, reverse: true})
-    .setTween(
-    	new TimelineMax()
-    		//forest exit
-				.add(TweenMax.to([
-					$('#forest-fill'), $('#forest-label')
-					], 0.5, hidden_opt), 0)
-
-    		.add(TweenMax.to($('polyline#thai-border'), 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
-    		.add(TweenMax.to($('#thai-label'), 0.5, visiable_opt))
-    )
+  var thrid_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration / 2, offset: duration / 2, reverse: true})
     .on('start', function(e){
     	var dir = e.scrollDirection,
     			scene = e.target
     	if (dir == 'FORWARD') {
     		changeBg(map, Malaysia.jpgs[2])
+
+        new TimelineMax()
+          .add(TweenMax.to($('polyline#thai-border'), 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
+          .add(TweenMax.to($('#thai-label'), 0.5, visiable_opt))
     	} else {
     		changeBg(map, Malaysia.jpgs[1])
+
+        new TimelineMax()
+          .add(TweenMax.to($('polyline#thai-border'), 0.3, {strokeDashoffset: 3579.52, ease:Linear.easeNone}), 0)
+          .add(TweenMax.to($('#thai-label'), 0.3, hidden_opt), 0)
     	}
     })
-    .addTo(controller);
+    .setTween(
+      new TimelineMax()
+        .add(TweenMax.to($('#thai-line'), 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
+        .add(TweenMax.to([
+          $('#bukit-text'), $('#marker-bukit')
+          ], 0.2, visiable_opt), 1)
+        .addCallback(()=>{
+          pulseMarker([
+            $('#marker-bukit'),
+          ])
+        }, 1.2)
 
-  var north_route_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration / 2, offset: duration / 2, reverse: true})
-  	.setTween(
-  		new TimelineMax()
-  			.add(TweenMax.to($('#thai-line'), 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
-  			.add(TweenMax.to([
-  				$('#bukit-text'), $('#marker-bukit')
-  				], 0.2, visiable_opt), 1)
-  			.addCallback(()=>{
-  				pulseMarker([
-  					$('#marker-bukit'),
-  				])
-  			}, 1.2)
-
-  			.add(TweenMax.to([
-  				$('#marker-rantau'), $('#marker-padang'), $('#padang-text'), $('#rantau-text')
-  				], 0.2, visiable_opt), 1.2)
-  			.addCallback(()=>{
-  				pulseMarker([
-  					$('#marker-rantau'),
-  					$('#marker-padang'),
-  				])
-  			}, 1.4)
-  	)
-  	.addIndicators()
+        .add(TweenMax.to([
+          $('#marker-rantau'), $('#marker-padang'), $('#padang-text'), $('#rantau-text')
+          ], 0.2, visiable_opt), 1.2)
+        .addCallback(()=>{
+          pulseMarker([
+            $('#marker-rantau'),
+            $('#marker-padang'),
+          ])
+        }, 1.4)
+    )
     .addTo(controller);
 }
 
