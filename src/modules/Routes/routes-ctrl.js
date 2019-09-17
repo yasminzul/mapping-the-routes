@@ -53,11 +53,11 @@ Malaysia.MapCtrl1 = () => {
         .add(TweenMax.to($('#melaka-label'), 0.5, visiable_opt))
         .add(TweenMax.to($('#caption01'), 0.5, visiable_opt))
     )
-    .on('leave', () => 
-      TweenMax.to([
-        $('#arrows'), $('#melaka-label'), $('#caption01')
-      ], 0.5, hidden_opt)
-    )
+    .on('leave', () => {
+      var targets = [$('#arrows'), $('#melaka-label'), $('#caption01')]
+      TweenMax.killTweensOf(targets)
+      TweenMax.to(targets, 0.5, hidden_opt)
+    })
     .addTo(controller);
 
   var second_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration / 4, offset: duration / 4, reverse: true})
@@ -66,11 +66,11 @@ Malaysia.MapCtrl1 = () => {
 				.add(TweenMax.to($('#forest-fill'), 0.5, visiable_opt))
 				.add(TweenMax.to($('#forest-label'), 0.3, visiable_opt))
     )
-    .on('leave', () =>
-      TweenMax.to([
-        $('#forest-fill'), $('#forest-label')
-      ], 0.5, hidden_opt)
-    )
+    .on('leave', () => {
+      var targets = [$('#forest-fill'), $('#forest-label')]
+      TweenMax.killTweensOf(targets)
+      TweenMax.to(targets, 0.5, hidden_opt)
+    })
     .on('start', function(e){
     	var dir = e.scrollDirection,
     			scene = e.target
@@ -94,6 +94,9 @@ Malaysia.MapCtrl1 = () => {
           .add(TweenMax.to($('#thai-label'), 0.5, visiable_opt))
     	} else {
     		changeBg(map, Malaysia.jpgs[1])
+
+        var targets = [$('polyline#thai-border'), $('#thai-label')]
+        TweenMax.killTweensOf(targets)
 
         new TimelineMax()
           .add(TweenMax.to($('polyline#thai-border'), 0.3, {strokeDashoffset: 3579.52, ease:Linear.easeNone}), 0)
