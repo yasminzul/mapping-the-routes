@@ -1,6 +1,5 @@
 import * as d3 from 'd3'
 import ScrollMagic from 'ScrollMagic'
-// import * as topojson from 'topojson'
 
 const SeizureMap = {}
 const $ = q => document.querySelector(q)
