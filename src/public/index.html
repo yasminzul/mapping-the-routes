@@ -43,7 +43,7 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
     </div>
   </div>
-  <video autoplay muted loop id="header-video" poster="assets/images/header-image-v1.jpg" class="mobile-hidden">
+  <video autoplay muted loop id="header-video" poster="">
     <source src="" type="video/mp4">
   </video>
 </div>
@@ -361,13 +361,33 @@
 <div style="display: none;">
   <script type="text/javascript">
     <!--//--><![CDATA[//><!--
+      //init
+      var isDesktopPrev = window.matchMedia("(min-device-width: 480px)").matches
+      loadHeaderVideo(isDesktopPrev)
+      //window resize:
+      window.onresize = function(){
+        var isDesktop = window.matchMedia("(min-device-width: 480px)").matches
+        // device change 
+        if (isDesktop != isDesktopPrev){
+          loadHeaderVideo(isDesktop)
+          isDesktopPrev = isDesktop
+        }
+      }
+
       //media query
-      if (window.matchMedia("(min-device-width: 480px)").matches){
-        console.log('header video loaded')
+      function loadHeaderVideo(isDesktop){
         var video = document.querySelector('#header-video')
         var source = document.querySelector('#header-video > source')
-        source.src = "assets/images/pangolinreports_header.mp4"
-        video.load()
+
+        if (isDesktop){
+          video.poster = "assets/images/header-image-desktop.jpg"
+          source.src = "assets/images/pangolinreports_header.mp4"
+          video.load()
+        } else {
+          video.poster = "assets/images/header-thumbnail-portrait.jpg"
+          source.src = "assets/images/pangolinreports_header_portrait.mp4"
+          video.load()
+        }
       }
 
       //preload
