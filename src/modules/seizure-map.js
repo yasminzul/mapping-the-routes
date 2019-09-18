@@ -72,6 +72,20 @@ var legend = svg.append('g')
       .attr('class', 'legend-text')
       .text('Current Year')
 
+//play or pause ctrl
+var playBtn = svg.append('g').attr('id', 'seizure-map-play-btn')
+    .attr('transform', 'translate(50, 450)')
+var playPause = playBtn
+    .append('path').attr('id', 'play-pause')
+      .attr('transform', 'translate(-9, -9)')
+      .attr('d', "M11 22h-4v-20h4v20zm6-20h-4v20h4v-20z")
+      .attr('fill', '#fff')
+var playCont = playBtn
+    .append('path').attr('id', 'play-cont')
+      .attr('transform', 'translate(-9, -9)')
+      .attr('d', "M3 22v-20l18 10-18 10z")
+      .attr('fill', '#fff')
+
 SeizureMap.renderMap = function(){
 	Promise.all([
 	    d3.json("assets/maps/world_countries.json"),
@@ -121,8 +135,6 @@ SeizureMap.renderMap = function(){
 	    .enter().append("path")
 	      .attr("d", path)
 	      .style("fill", '#694b2d')
-	      // .style('stroke', '#3b3b3b')
-	      // .style('stroke-width', 0.5)
 	}
 }
 
@@ -280,23 +292,61 @@ function updateMapPoints(data, year) {
 function initAutoPlayCtrl(data) {
   var controller = new ScrollMagic.Controller();
   var interval = null
+  var intervalSet = false
   var stage = {curr_idx: 0} //record the stage of interval, use object to pass as reference value
+
+  var start = function(){
+    svg.selectAll("circle.seizure-bubble").remove() // clear final screen circles
+    interval = autoplay(data, stage)
+    intervalSet = true
+  }
+
+  var stop = function(){
+    clearInterval(interval)
+    intervalSet = false
+    //render final screen
+    svg.selectAll("circle.seizure-bubble").remove()
+    updateMapPoints(data)
+    updateLabels(data, 2019)
+  }
+
+  var pause = function(){
+    clearInterval(interval)
+    intervalSet = false
+  }
+
+  var cont = function(){
+    interval = autoplay(data, stage)
+    intervalSet = true
+  }
+
+  var changeBtn = function(){
+    playCont.attr('fill', intervalSet? '#fff': 'none')
+    playPause.attr('fill', intervalSet? 'none' : '#fff')
+  }
 
   new ScrollMagic.Scene({ triggerElement: $('#geo-map-container'), duration: $('#geo-map-container').offsetHeight})
     .on('enter', function () {
       console.log('enter map')
-      svg.selectAll("circle.seizure-bubble").remove() // clear final screen circles
-      interval = autoplay(data, stage)
+      start()
+      changeBtn()
     })
     .on('leave', function () {
       console.log('leave map')
-      clearInterval(interval)
-      //render final screen
-      svg.selectAll("circle.seizure-bubble").remove()
-      updateMapPoints(data)
-      updateLabels(data, 2019)
+      stop()
+      changeBtn()
     })
     .addTo(controller);
+
+  //ctrl manually
+  $('#seizure-map-play-btn').addEventListener('click', evt=>{
+    if(intervalSet) {
+      pause()
+    } else {
+      cont()
+    }
+    changeBtn()
+  })
 } 
 
 function autoplay(data, stage){
