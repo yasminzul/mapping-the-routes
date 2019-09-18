@@ -56,6 +56,10 @@ a:hover {
 	background: #dcba7d;
 }
 
+.icon > a:hover, .footer-icon > a:hover{
+	background: none;
+}
+
 .header{
 	width: 100vw;
 	height: 100vh;

@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="5.902" height="11.804" viewBox="0 0 5.902 11.804">
     <defs>
         <style>
-            .cls-1{fill:#dcba7d}
+            .icon-svg{fill:#dcba7d}
         </style>
     </defs>
-    <path id="Facebook" d="M3.924 11.8H1.308V6.23H0V4.082h1.308V2.794C1.308 1.042 2.046 0 4.143 0h1.746v2.148H4.8c-.817 0-.871.3-.871.86v1.074H5.9L5.67 6.23H3.924v5.57z" class="cls-1"/>
+    <path id="Facebook" d="M3.924 11.8H1.308V6.23H0V4.082h1.308V2.794C1.308 1.042 2.046 0 4.143 0h1.746v2.148H4.8c-.817 0-.871.3-.871.86v1.074H5.9L5.67 6.23H3.924v5.57z" class="icon-svg"/>
 </svg>
