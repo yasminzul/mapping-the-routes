@@ -325,12 +325,6 @@ path{
 	width: 100%;
 }
 
-#timeline-container{
-	width: 100%;
-	height: auto;
-	overflow: hidden;
-}
-
 .vis-title {
   font: 16px 'Open Sans';
   font-weight: bold;

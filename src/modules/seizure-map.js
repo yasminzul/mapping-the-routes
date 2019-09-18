@@ -11,12 +11,16 @@ var svg = d3.select("#geo-map-container")
             .append("svg")
             .attr('x', 0)
             .attr('y', 0)
-            .attr('viewBox', '0 0 960 500')
+            .attr('viewBox', '0 0 960 630') //500 for map, 120 for timeline, 10 for padding-top
             .attr('id', 'geo-map')
 
-var bg = svg.append('rect').attr('width', '100%').attr('height', '100%').attr('fill', '#3b3b3b')
+var bg = svg.append('rect').attr('width', '100%').attr('height', '500').attr('fill', '#3b3b3b')
+
+var g_world_clip = svg.append('clipPath').attr('id', 'seizure-map-clip')
+g_world_clip.append('rect').attr('width', '100%').attr('height', '500')
 
 var g_world = svg.append("g")
+                  .attr('clip-path', 'url(#seizure-map-clip)')
     							.attr("class", "countries")
 
 var projection = d3.geoMercator()
@@ -44,9 +48,7 @@ var count_text =  svg.append("text")
 	    .attr("class", "seizure-total")
 	    .text("0");
 
-//timeline svg and g init
-var timelineSvg = d3.select("#timeline-container").append("svg")
-var timeline = timelineSvg.append("g").attr("class", "timeline")
+var timeline = svg.append("g").attr("class", "timeline")
 // var bursh_g = timeline.append("g").attr("class", "brush")
 
 // tooltips
@@ -111,15 +113,11 @@ SeizureMap.renderMap = function(){
 
 function makeTimeline(dataForMap, dataForTimeline) {
   var margin = { top: 10, right: 10, bottom: 20, left: 15 },
-      w = $('#timeline-container').offsetWidth - margin.left - margin.right,
-      h = 80 - margin.top  - margin.bottom;
-
- 	timelineSvg
-      .attr("width", w + margin.left + margin.right)
-      .attr("height", h + margin.top + margin.bottom);
+      w = 960 - margin.left - margin.right,
+      h = 120 - margin.bottom //margin-top is gap by timeline group translate
 
   timeline
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate("+ margin.left + " , 510)");
 
   //calculate sum of each year
   var year_sums = {}
