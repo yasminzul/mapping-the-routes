@@ -34,6 +34,7 @@ const Malaysia = {
 
 Malaysia.MapCtrl1 = () => {
 	var controller = new ScrollMagic.Controller();
+
 	var map = Malaysia.maps[0],
 			visiable_opt = {opacity: 1, ease:Linear.easeNone},
 			hidden_opt = {opacity: 0, ease:Linear.easeNone}
@@ -132,8 +133,8 @@ function pulseMarker(markers){
 	var inners = markers.map(item=>item.querySelector('.marker-inner'))
 	var outters = markers.map(item=>item.querySelector('.marker-outter'))
 
-	TweenMax.fromTo(inners, 3, {attr:{r: 12.06}}, {attr:{r: 20}}).repeat(-1)//.yoyo(true)
-	TweenMax.fromTo(outters, 3, {attr:{r: 20}, opacity: 0.6}, {attr:{r: 55.68}, opacity: 0.2}).repeat(-1)
+	// TweenMax.fromTo(inners, 3, {attr:{r: 12.06}}, {attr:{r: 20}}).repeat(-1)//.yoyo(true)
+	TweenMax.fromTo(outters, 1, {attr:{r: 20}, opacity: 0.4}, {attr:{r: 55.68}, opacity: 0}).repeat(-1)
 }
 
 function changeBg($map, src){
