@@ -6,6 +6,25 @@ import 'animation.gsap'
 const $ = q => document.querySelector(q)
 const ProgressBar = function(){}
 
+ProgressBar.ctrlHeaderAudio = ()=>{
+  var video = $('#header-video')
+  var controller = new ScrollMagic.Controller();
+  // build scene
+  var scene = new ScrollMagic.Scene({triggerElement: $('#header-caption'), triggerHook: 'onLeave', duration: 0})
+    .on('start', function(e){
+      var dir = e.scrollDirection,
+          scene = e.target
+      if (dir == 'FORWARD') {
+        console.log('muted')
+        video.muted = true
+      } else {
+        console.log('unmuted')
+        video.muted = false
+      }
+    })
+    .addTo(controller)
+}
+
 ProgressBar.initScrollController = ()=>{
   const $bar = $('#progress-bar')
   var $body = document.body

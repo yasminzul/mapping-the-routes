@@ -17,6 +17,7 @@ import RoutesCtrl from './modules/Routes/routes-ctrl.js'
 // Map.initTooltip()
 
 window.addEventListener('DOMContentLoaded', () => {
+	ProgressBar.ctrlHeaderAudio()
 	ProgressBar.initScrollController()
 	ProgressBar.initClickNav()
 
