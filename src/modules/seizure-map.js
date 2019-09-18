@@ -24,15 +24,15 @@ var g_world = svg.append("g")
     							.attr("class", "countries")
 
 var projection = d3.geoMercator()
-                   .scale(150) //130 show full map, default 150
-                   // .translate([width / 2, height / 1.5]);
+                    .scale(160)
+                    .translate([150, 320]);
 
 //path generator: convert geojson feature to svg path
 var path = d3.geoPath().projection(projection);
 
 var title = svg.append("text")
 	    .attr("class", "vis-title")
-	    .attr("transform", "translate(" + 50 + "," + 460 + ")")
+	    .attr("transform", "translate(" + 650 + "," + 140 + ")")
       .text('pangolin trafficked')
 
 var range = title.append('tspan').attr('x', 0).attr('dy', '1.3em')
@@ -40,11 +40,12 @@ var range = title.append('tspan').attr('x', 0).attr('dy', '1.3em')
 
 //add red bg
 var count_bg = svg.append('rect')
-      .attr("transform", "translate(" + 40 + "," + 420 + ")")
+      .attr("transform", "translate(" + 650 + "," + 106 + ")")
+      .attr('height', '5em')
       .attr('fill', 'red')
 
 var count_text =  svg.append("text")
-      .attr("transform", "translate(" + 50 + "," + 420 + ")")
+      .attr("transform", "translate(" + 660 + "," + 100 + ")")
 	    .attr("class", "seizure-total")
 	    .text("0");
 
@@ -55,6 +56,21 @@ var timeline = svg.append("g").attr("class", "timeline")
 var bartip = d3.select('.container').append('div')
     .attr('class', 'bartip')
     .style('display', 'none');
+
+//legend
+var legend = svg.append('g')
+    .attr('transform', 'translate(780, 450)').attr('id', 'seizure-map-legend')
+  legend
+    .append('circle')
+      .attr('x', 0).attr('y', 0)
+      .attr('r', 6).attr('fill', 'rgba(240, 135, 24)')
+      .attr('stroke-width', '0.5px')
+      .attr('stroke', '#fff')
+  legend
+    .append('text')
+      .attr('x', 14).attr('y', 6)
+      .attr('class', 'legend-text')
+      .text('Current Year')
 
 SeizureMap.renderMap = function(){
 	Promise.all([
@@ -105,9 +121,8 @@ SeizureMap.renderMap = function(){
 	    .enter().append("path")
 	      .attr("d", path)
 	      .style("fill", '#694b2d')
-	      .style('stroke', '#3b3b3b')
-	      .style('stroke-width', 0.5)
-	      .style("opacity",0.8)
+	      // .style('stroke', '#3b3b3b')
+	      // .style('stroke-width', 0.5)
 	}
 }
 
@@ -155,7 +170,7 @@ function makeTimeline(dataForMap, dataForTimeline) {
  			.enter().append('rect').attr("class", 'bar')
  			.style('fill', "#dcba7d")
  			.attr('x', function(d){return x(d.TIME)})
- 			.attr('width', (Math.round(w / 20) - 10)+'px')
+ 			.attr('width', (Math.round(w / 19) - 10)+'px')
  			.attr('y', function(d){return y(d.TOTAL)})
  			.attr("height", function(d) { return h - y(d.TOTAL); })
       .on('mouseover', function (){
@@ -236,19 +251,19 @@ function updateTitleText(newDateArray, filteredData) {
       .attr('x', count_text.node().getBBox().x)
       .attr('y', count_text.node().getBBox().y)
       .attr('width', +count_text.node().getBBox().width + 20)
-      .attr('height', '6.5em')
 }
 
 // Updates the points displayed on the map, to those in the passed data array
 function updateMapPoints(data, year) {
-    var circles = svg.selectAll("circle").data(data, function(d) { return d.id });
+    var circles = svg.selectAll("circle.seizure-bubble").data(data, function(d) { return d.id });
 
     if (year == "2000") { //reset
-      svg.selectAll("circle").remove()
+      svg.selectAll("circle.seizure-bubble").remove()
     }
 
     circles.enter().append("circle") // new entering points
-        .attr("fill", "rgba(201, 62, 62, 0.3)")
+        .attr('class', 'seizure-bubble')
+        .attr("fill", "rgba(240, 135, 24, 0.3)") 
         .attr("cx", function(d) { return projection([+d.Longitude, +d.Latitude])[0]; })
         .attr("cy", function(d) { return projection([+d.Longitude, +d.Latitude])[1]; })
         .attr("r",  0)
@@ -259,7 +274,7 @@ function updateMapPoints(data, year) {
     circles.exit() // exiting points
       .transition()
         .duration(500)
-        .attr("fill", "rgba(240, 135, 24, 0.3)")        
+        .attr("fill", "rgba(201, 62, 62, 0.3)")
 };
 
 function initAutoPlayCtrl(data) {
@@ -270,14 +285,14 @@ function initAutoPlayCtrl(data) {
   new ScrollMagic.Scene({ triggerElement: $('#geo-map-container'), duration: $('#geo-map-container').offsetHeight})
     .on('enter', function () {
       console.log('enter map')
-      svg.selectAll("circle").remove() // clear final screen circles
+      svg.selectAll("circle.seizure-bubble").remove() // clear final screen circles
       interval = autoplay(data, stage)
     })
     .on('leave', function () {
       console.log('leave map')
       clearInterval(interval)
       //render final screen
-      svg.selectAll("circle").remove()
+      svg.selectAll("circle.seizure-bubble").remove()
       updateMapPoints(data)
       updateLabels(data, 2019)
     })
@@ -309,7 +324,6 @@ function updateLabels(data, curr_year){
     .attr('x', count_text.node().getBBox().x)
     .attr('y', count_text.node().getBBox().y)
     .attr('width', +count_text.node().getBBox().width + 20)
-    .attr('height', '6.5em')
 }
 
 export default SeizureMap

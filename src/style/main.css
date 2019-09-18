@@ -332,9 +332,15 @@ path{
 }
 
 .seizure-total{
-	font: 5em 'Open Sans';
+	font: 4em 'Open Sans';
   font-weight: bold;
   fill: white;
+}
+
+.legend-text{
+	fill: white;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
 }
 
 .circle-hover {
