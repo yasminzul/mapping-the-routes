@@ -16,7 +16,7 @@
   }
 
   .header-container{
-		margin: 0 28% 0 12%;
+		margin: 5% 28% 0 12%;
 	}
 
 	.header-title div{
@@ -40,12 +40,15 @@
 	{
 		background-color: #dcba7d;
 		font-size: 1.2em;
-		border-color: #dcba7d;
-		color: #ffffff;
 		border-radius: 1vh;
 		padding: 1vh 1vw;
-		margin-top: 2vh;
 		transition: all .3s ease-in-out;
+		margin-top: 0;
+	}
+
+	.header-button
+	{
+		margin-top: 4vh;
 	}
 
 	.nav {
