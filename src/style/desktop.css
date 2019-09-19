@@ -16,7 +16,7 @@
   }
 
   .header-container{
-		margin: 5% 28% 0 12%;
+		margin: 5% 0 0 50%;
 	}
 
 	.header-title div{
@@ -25,9 +25,8 @@
 	}
 
 	.header-intro{
-		margin-top: 2vh;
 		margin-bottom: 2vh;
-		font-size: 1.25vw;
+		font-size: 1vw;
 		width: 55%;
 
 	}
