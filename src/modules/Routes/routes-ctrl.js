@@ -28,44 +28,46 @@ const Malaysia = {
 		`${SVG}Malaysia map-07.svg`,
 	],
 	maps: [
-		$('#malaysia-routes-1'),
+    $('#malaysia-routes-1'),
 	]
 }
 
 Malaysia.MapCtrl1 = () => {
-	var controller = new ScrollMagic.Controller();
+  var map = Malaysia.maps[0],
+      visiable_opt = {opacity: 1, ease:Linear.easeNone},
+      hidden_opt = {opacity: 0, ease:Linear.easeNone}
 
-	var map = Malaysia.maps[0],
-			visiable_opt = {opacity: 1, ease:Linear.easeNone},
-			hidden_opt = {opacity: 0, ease:Linear.easeNone}
+  var controller = new ScrollMagic.Controller();
 
-  var main_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: '200%', reverse: true})
+  var navOffset = ($('.nav').offsetHeight + $('#progress-div').offsetHeight) || 0
+
+  var pin_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: '300%', offset: (-navOffset), reverse: true})
     .on('enter', function(){
-    	this.setPin(this.triggerElement())
+      this.setPin(this.triggerElement(), {pushFollowers: false})
     })
-    .addTo(controller);
+    .addTo(controller)
 
-  var duration = main_scene.duration()
+  var duration_per = pin_scene.duration() / 3
 
-  var first_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration / 4, reverse: true})
+  //first scene trigger inmediately on map pin, use onLeave triggerHook
+  var first_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (-navOffset), reverse: true})
     .on('enter', () =>
       new TimelineMax()
         .add(TweenMax.to($('#arrows'), 0.5, visiable_opt))
         .add(TweenMax.to($('#melaka-label'), 0.5, visiable_opt))
-        .add(TweenMax.to($('#caption01'), 0.5, visiable_opt))
     )
     .on('leave', () => {
-      var targets = [$('#arrows'), $('#melaka-label'), $('#caption01')]
+      var targets = [$('#arrows'), $('#melaka-label')]
       TweenMax.killTweensOf(targets)
       TweenMax.to(targets, 0.5, hidden_opt)
     })
     .addTo(controller);
 
-  var second_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration / 4, offset: duration / 4, reverse: true})
+  var second_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (duration_per-navOffset), reverse: true})
     .on('enter', () =>
-    	new TimelineMax()
-				.add(TweenMax.to($('#forest-fill'), 0.5, visiable_opt))
-				.add(TweenMax.to($('#forest-label'), 0.3, visiable_opt))
+      new TimelineMax()
+        .add(TweenMax.to($('#forest-fill'), 0.5, visiable_opt))
+        .add(TweenMax.to($('#forest-label'), 0.3, visiable_opt))
     )
     .on('leave', () => {
       var targets = [$('#forest-fill'), $('#forest-label')]
@@ -73,28 +75,28 @@ Malaysia.MapCtrl1 = () => {
       TweenMax.to(targets, 0.5, hidden_opt)
     })
     .on('start', function(e){
-    	var dir = e.scrollDirection,
-    			scene = e.target
-    	if (dir == 'FORWARD') {
-    		changeBg(map, Malaysia.jpgs[1])
-    	} else {
-    		changeBg(map, Malaysia.jpgs[0])
-    	}
+      var dir = e.scrollDirection,
+          scene = e.target
+      if (dir == 'FORWARD') {
+        changeBg(map, Malaysia.jpgs[1])
+      } else {
+        changeBg(map, Malaysia.jpgs[0])
+      }
     })
     .addTo(controller);
 
-  var thrid_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration / 2, offset: duration / 2, reverse: true})
+  var thrid_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (2 * duration_per-navOffset), reverse: true})
     .on('start', function(e){
-    	var dir = e.scrollDirection,
-    			scene = e.target
-    	if (dir == 'FORWARD') {
-    		changeBg(map, Malaysia.jpgs[2])
+      var dir = e.scrollDirection,
+          scene = e.target
+      if (dir == 'FORWARD') {
+        changeBg(map, Malaysia.jpgs[2])
 
         new TimelineMax()
           .add(TweenMax.to($('polyline#thai-border'), 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
           .add(TweenMax.to($('#thai-label'), 0.5, visiable_opt))
-    	} else {
-    		changeBg(map, Malaysia.jpgs[1])
+      } else {
+        changeBg(map, Malaysia.jpgs[1])
 
         var targets = [$('polyline#thai-border'), $('#thai-label')]
         TweenMax.killTweensOf(targets)
@@ -102,7 +104,7 @@ Malaysia.MapCtrl1 = () => {
         new TimelineMax()
           .add(TweenMax.to($('polyline#thai-border'), 0.3, {strokeDashoffset: 3579.52, ease:Linear.easeNone}), 0)
           .add(TweenMax.to($('#thai-label'), 0.3, hidden_opt), 0)
-    	}
+      }
     })
     .setTween(
       new TimelineMax()
@@ -138,11 +140,11 @@ function pulseMarker(markers){
 }
 
 function changeBg($map, src){
-	$map.querySelector('.routes-bg').src = src
+	$map.querySelector('.routes-map-bg').src = src
 }
 
 const init = () => {
-	Malaysia.MapCtrl1()
+  Malaysia.MapCtrl1()
 }
 
 export default { init }

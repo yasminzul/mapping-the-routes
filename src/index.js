@@ -1,6 +1,6 @@
 import './style/main.css'
 import './style/desktop.css'
-import './style/tooltip.css'
+import './style/routes-map.css'
 import './style/progress-bar.css'
 import './style/overlay.css'
 
@@ -9,12 +9,6 @@ import Hash from './modules/url-hash.js'
 import Subscribe from './modules/subscribe.js'
 import SeizureMap from './modules/seizure-map.js'
 import RoutesCtrl from './modules/Routes/routes-ctrl.js'
-
-// import Map from './modules/map.js'
-
-// Map.initMap()
-// Map.initScrollController()
-// Map.initTooltip()
 
 window.addEventListener('DOMContentLoaded', () => {
 	ProgressBar.ctrlHeaderAudio()
