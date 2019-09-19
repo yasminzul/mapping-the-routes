@@ -18,15 +18,6 @@ const Malaysia = {
 		`${IMG}map-05.jpg`,
 		`${IMG}map-06.jpg`,
 	],
-	svgs:[
-		`${SVG}Malaysia map-01.svg`,
-		`${SVG}Malaysia map-02.svg`,
-		`${SVG}Malaysia map-03.svg`,
-		`${SVG}Malaysia map-04.svg`,
-		`${SVG}Malaysia map-05.svg`,
-		`${SVG}Malaysia map-06.svg`,
-		`${SVG}Malaysia map-07.svg`,
-	],
 	maps: [
     $('#malaysia-routes-1'),
 	]
@@ -74,61 +65,34 @@ Malaysia.MapCtrl1 = () => {
       TweenMax.killTweensOf(targets)
       TweenMax.to(targets, 0.5, hidden_opt)
     })
-    .on('start', function(e){
-      var dir = e.scrollDirection,
-          scene = e.target
-      if (dir == 'FORWARD') {
-        changeBg(map, Malaysia.jpgs[1])
-      } else {
-        changeBg(map, Malaysia.jpgs[0])
-      }
-    })
     .addTo(controller);
 
   var thrid_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (2 * duration_per-navOffset), reverse: true})
-    .on('start', function(e){
-      var dir = e.scrollDirection,
-          scene = e.target
-      if (dir == 'FORWARD') {
-        changeBg(map, Malaysia.jpgs[2])
-
-        new TimelineMax()
-          .add(TweenMax.to($('polyline#thai-border'), 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
-          .add(TweenMax.to($('#thai-label'), 0.5, visiable_opt))
-      } else {
-        changeBg(map, Malaysia.jpgs[1])
-
-        var targets = [$('polyline#thai-border'), $('#thai-label')]
-        TweenMax.killTweensOf(targets)
-
-        new TimelineMax()
-          .add(TweenMax.to($('polyline#thai-border'), 0.3, {strokeDashoffset: 3579.52, ease:Linear.easeNone}), 0)
-          .add(TweenMax.to($('#thai-label'), 0.3, hidden_opt), 0)
-      }
-    })
     .setTween(
       new TimelineMax()
-        .add(TweenMax.to($('#thai-line'), 1, {strokeDashoffset: 0, ease:Linear.easeNone}))
+        .add(TweenMax.to($('#highway-line'), 0.7, {strokeDashoffset: 0, ease:Linear.easeNone}))
         .add(TweenMax.to([
           $('#bukit-text'), $('#marker-bukit')
-          ], 0.2, visiable_opt), 1)
+          ], 0, visiable_opt), 0.7)
         .addCallback(()=>{
           pulseMarker([
             $('#marker-bukit'),
           ])
-        }, 1.2)
+        }, 0.7)
 
         .add(TweenMax.to([
           $('#marker-rantau'), $('#marker-padang'), $('#padang-text'), $('#rantau-text')
-          ], 0.2, visiable_opt), 1.2)
+          ], 0, visiable_opt), 0.8)
         .addCallback(()=>{
           pulseMarker([
             $('#marker-rantau'),
             $('#marker-padang'),
           ])
-        }, 1.4)
+        }, 0.8)
     )
     .addTo(controller);
+
+    return controller
 }
 
 function pulseMarker(markers){
@@ -143,8 +107,13 @@ function changeBg($map, src){
 	$map.querySelector('.routes-map-bg').src = src
 }
 
-const init = () => {
-  Malaysia.MapCtrl1()
+const init = (isDesktop) => {
+  if (isDesktop){
+    //return all controllers
+    return [Malaysia.MapCtrl1()]
+  } else {
+    return []
+  }
 }
 
 export default { init }
