@@ -40,10 +40,6 @@ body {
 	color: #fff;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> contribution-css
 .white a {
 	color: #fff;
 	text-decoration: none;
@@ -134,11 +130,11 @@ a:hover {
 	font-size: 1em;
 	border-color: #dcba7d;
 	color: #000000;
-	border-radius: 1vh;
 	padding: 1vh 5vw;
 	transition: all .3s ease-in-out;
 	cursor: pointer;
 	margin-top: 1vh;
+	text-transform: uppercase;
 }
 
 .header-button

@@ -39,7 +39,7 @@
 	{
 		background-color: #dcba7d;
 		font-size: 1.2em;
-		border-radius: 1vh;
+		text-transform: uppercase;
 		padding: 1vh 1vw;
 		transition: all .3s ease-in-out;
 		margin-top: 0;
@@ -52,10 +52,11 @@
 
 	#header-caption {
 	  padding: 10px 0;
-	  margin: 0 2vw 0 40vw;
-		font-size: 12px;
+	  margin: 0 2vw 0 55vw;
+		font-size: 15px;
 		color: #d9d9d9;
-		text-align: right;
+		text-align: left;
+		line-height: 1.5;
 		z-index: 3;
 	}
 
