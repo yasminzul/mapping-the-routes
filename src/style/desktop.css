@@ -37,12 +37,12 @@
 
 	.header-button button
 	{
-		background-color: #dcba7d;
 		font-size: 1.2em;
 		text-transform: uppercase;
-		padding: 1vh 1vw;
+		padding: 1.5vh 2vw;
 		transition: all .3s ease-in-out;
 		margin-top: 0;
+		letter-spacing: 1px;
 	}
 
 	.header-button

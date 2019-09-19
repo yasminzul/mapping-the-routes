@@ -56,10 +56,6 @@ a {
 	transition: all .3s ease-in-out;
 }
 
-a:hover {
-	color: white;
-	background: #dcba7d;
-}
 
 .icon > a:hover, .footer-icon > a:hover{
 	background: none;
@@ -126,20 +122,28 @@ a:hover {
 
 .header-button button
 {
-	background-color: #dcba7d;
+	background-color: transparent;
 	font-size: 1em;
-	border-color: #dcba7d;
-	color: #000000;
-	padding: 1vh 5vw;
+	color: #dcba7d;
+	border: #dcba7d solid 3px;
+	padding: 2vh 6vw;
 	transition: all .3s ease-in-out;
 	cursor: pointer;
-	margin-top: 1vh;
+	margin-top: 2vh;
 	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: bold;
+}
+
+.header-button button:hover
+{
+	background-color: #dcba7d;
+	color: #fff;
 }
 
 .header-button
 {
-	margin-top: 2vh;
+	margin-top: 5vh;
 }
 
 .nav {
