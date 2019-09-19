@@ -40,6 +40,10 @@ body {
 	color: #fff;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> contribution-css
 .white a {
 	color: #fff;
 	text-decoration: none;
@@ -104,12 +108,13 @@ a:hover {
 }
 
 .header-title{
-	font-size: 3em;
+	font-size: 3.8em;
 	font-family: 'ZCOOL XiaoWei', serif;
 	color: #fff
 }
 
 .header-intro{
+	margin-top: 2vh;
 	font-size: 0.8em;
   font-weight: normal;
   font-style: normal;
@@ -120,7 +125,7 @@ a:hover {
 }
 
 .header-indent{
-	margin-left: 21px;
+	margin-left: 35px;
 }
 
 .header-button button
