@@ -40,6 +40,12 @@ body {
 	color: #fff;
 }
 
+
+.white a {
+	color: #fff;
+	text-decoration: none;
+}
+
 .yellow {
 	color: #dcba7d;
 }
