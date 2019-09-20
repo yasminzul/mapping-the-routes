@@ -328,25 +328,23 @@
 <!-- image preloader -->
 <div style="display: none;">
   <script type="text/javascript">
-    <!--//--><![CDATA[//><!--
-      //preload
-      var images = new Array()
-      function preload() {
-        for (i = 0; i < preload.arguments.length; i++) {
-          images[i] = new Image()
-          images[i].src = preload.arguments[i]
-        }
+    //preload
+    var images = new Array()
+    function preload() {
+      for (i = 0; i < preload.arguments.length; i++) {
+        images[i] = new Image()
+        images[i].src = preload.arguments[i]
       }
-      preload(
-        'assets/maps/Malaysia/desktop/map-01.jpg',
-        'assets/maps/Malaysia/desktop/map-02.jpg',
-        'assets/maps/Malaysia/desktop/map-03.jpg',
+    }
+    preload(
+      'assets/maps/Malaysia/desktop/map-01.jpg',
+      'assets/maps/Malaysia/desktop/map-02.jpg',
+      'assets/maps/Malaysia/desktop/map-03.jpg',
 
-        'assets/maps/Malaysia/mobile/m-01.jpg',
-        'assets/maps/Malaysia/mobile/m-02.jpg',
-        'assets/maps/Malaysia/mobile/m-03.jpg',
-      )
-    //--><!]]>
+      'assets/maps/Malaysia/mobile/m-01.jpg',
+      'assets/maps/Malaysia/mobile/m-02.jpg',
+      'assets/maps/Malaysia/mobile/m-03.jpg',
+    )
   </script>
 </div>
 </body>
