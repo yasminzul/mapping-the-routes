@@ -6,21 +6,20 @@ import * as d3 from 'd3'
 import 'debug.addIndicators'
 
 const $ = q => document.querySelector(q)
-const IMG = 'assets/maps/Malaysia/IMG/'
-const SVG = 'assets/maps/Malaysia/SVG/'
+const MOBILE = 'assets/maps/Malaysia/mobile/'
 
 const Malaysia = {
-	jpgs: [
-		`${IMG}map-01.jpg`,
-		`${IMG}map-02.jpg`,
-		`${IMG}map-03.jpg`,
-		`${IMG}map-04.jpg`,
-		`${IMG}map-05.jpg`,
-		`${IMG}map-06.jpg`,
-	],
 	maps: [
     $('#malaysia-routes-1'),
-	]
+	],
+  pics_m: [
+    `${MOBILE}m-01.jpg`,
+    `${MOBILE}m-02.jpg`,
+    `${MOBILE}m-03.jpg`,
+  ],
+  maps_m: [
+    $('#malaysia-routes-m-1'),
+  ]
 }
 
 Malaysia.MapCtrl1 = () => {
@@ -95,6 +94,46 @@ Malaysia.MapCtrl1 = () => {
     return controller
 }
 
+Malaysia.MapCtrlM1 = () => {
+  var map = Malaysia.maps_m[0]
+
+  var controller = new ScrollMagic.Controller();
+
+  var navOffset = ($('.nav').offsetHeight + $('#progress-div').offsetHeight) || 0
+
+  var pin_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: '300%', offset: (-navOffset), reverse: true})
+    .on('enter', function(){
+      this.setPin(this.triggerElement(), {pushFollowers: false})
+    })
+    .addTo(controller)
+
+  var duration_per = pin_scene.duration() / 3
+  //first scene trigger inmediately on map pin, use onLeave triggerHook
+  var second_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (duration_per-navOffset), reverse: true})
+    .on('start', (e) =>{
+      var isForward = e.scrollDirection == 'FORWARD' ? true : false
+      if (isForward){
+        changeBg(map, Malaysia.pics_m[1])
+      } else {
+        changeBg(map, Malaysia.pics_m[0])
+      }
+    })
+    .addTo(controller);
+
+  var thrid_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (2*duration_per-navOffset), reverse: true})
+    .on('start', (e) =>{
+      var isForward = e.scrollDirection == 'FORWARD' ? true : false
+      if (isForward){
+        changeBg(map, Malaysia.pics_m[2])
+      } else {
+        changeBg(map, Malaysia.pics_m[1])
+      }
+    })
+    .addTo(controller);
+
+  return controller
+}
+
 function pulseMarker(markers){
 	var inners = markers.map(item=>item.querySelector('.marker-inner'))
 	var outters = markers.map(item=>item.querySelector('.marker-outter'))
@@ -104,7 +143,8 @@ function pulseMarker(markers){
 }
 
 function changeBg($map, src){
-	$map.querySelector('.routes-map-bg').src = src
+  //used only on mobile
+	$map.querySelector('.routes-map-bg-m').src = src
 }
 
 const init = (isDesktop) => {
@@ -112,7 +152,7 @@ const init = (isDesktop) => {
     //return all controllers
     return [Malaysia.MapCtrl1()]
   } else {
-    return []
+    return [Malaysia.MapCtrlM1()]
   }
 }
 

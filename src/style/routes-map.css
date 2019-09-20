@@ -2,8 +2,6 @@
 	/*1466 : 1080*/
 	width: 100vw;
 	height: 73.67vw;
-	margin-left: -15px;
-	margin-right: -15px;
 	background-size: cover;
 	position: relative;
 }
@@ -43,8 +41,30 @@
 .routes-map-para > p{
 	padding: 8vw 5vw;
 	border: 1px solid #ccc;
-	background: rgba(255, 255, 255, 0.8);
+	background: rgba(255, 255, 255, 0.85);
+	z-index: 1;
 }
+
+/* mobile routes map*/
+.routes-map-container-m{
+	/*750 : 1334*/
+	width: 100vw;
+	height: 177.87vw;
+	background-size: cover;
+	position: relative;
+	margin: 0 -15px;
+	overflow: hidden;
+}
+
+.routes-map-bg-m{
+	width: 100%;
+	position: absolute;
+	display: block;
+	height: auto;
+	left: 0;
+	top: 0;
+}
+/* mobile routes map/
 
 /* Desktop */
 @media only screen and (min-device-width: 480px) {
