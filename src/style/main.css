@@ -64,7 +64,7 @@ a:hover {
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
-	background: url(assets/images/header-thumbnail-portrait.jpg) no-repeat center center fixed; 
+	background: url(assets/images/header-thumbnail-portrait.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -85,13 +85,13 @@ a:hover {
   position: absolute;
   left: 0;
   top: 0;
-  min-width: 100%; 
+  min-width: 100%;
   min-height: 100%;
   z-index: 0;
 }
 
 #header-caption {
-  padding: 10px 0; 
+  padding: 10px 0;
   margin: 0 50px;
 }
 
@@ -100,7 +100,7 @@ a:hover {
 	width: auto;
 	height: auto;
 	z-index: 1;
-	padding-bottom: 20vh;	
+	padding-bottom: 20vh;
 }
 
 .header-title{
@@ -270,7 +270,7 @@ a:hover {
   color: #3b3b3b;
   border-bottom: 1px solid #dcba7d;
   margin: 10px 0 0 0;
-  padding-bottom: 10px; 
+  padding-bottom: 10px;
 }
 /*component*/
 
@@ -373,5 +373,3 @@ a:hover {
 	left: 0;
 	top: 0;
 }
-/*snazzy map*/
->>>>>>> contribution-css
