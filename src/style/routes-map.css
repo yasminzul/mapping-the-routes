@@ -26,6 +26,7 @@
 
 .routes-map-para{
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
@@ -38,7 +39,11 @@
 	margin-left: -15px;
 }
 
-.routes-map-para > p{
+.routes-map-para-icon{
+	width: 40vw
+}
+
+.routes-map-para p{
 	padding: 8vw 5vw;
 	border: 1px solid #ccc;
 	background: rgba(255, 255, 255, 0.85);
@@ -82,7 +87,11 @@
 		margin: 0 0 0 -25vw !important;
 	}
 
-	.routes-map-para > p{
+	.routes-map-para-icon{
+		width: 6vw
+	}
+
+	.routes-map-para p{
 		padding: 0;
 		border: none;
 		background: none;

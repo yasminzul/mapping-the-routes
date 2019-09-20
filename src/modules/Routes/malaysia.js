@@ -2,12 +2,15 @@ import TweenMax from 'TweenMax'
 import ScrollMagic from 'ScrollMagic'
 import 'animation.gsap'
 
+import 'debug.addIndicators'
+
 const $ = q => document.querySelector(q)
 const MOBILE = 'assets/maps/Malaysia/mobile/'
 
 const Malaysia = {
 	maps: [
     $('#malaysia-routes-1'),
+    $('#malaysia-routes-2'),
 	],
   pics_m: [
     `${MOBILE}m-01.jpg`,
@@ -89,6 +92,82 @@ Malaysia.MapCtrl1 = () => {
     .addTo(controller);
 
     return controller
+}
+
+Malaysia.MapCtrl2 = () => {
+  var map = Malaysia.maps[1],
+    visiable_opt = {opacity: 1, ease:Linear.easeNone},
+    hidden_opt = {opacity: 0, ease:Linear.easeNone}
+
+  var controller = new ScrollMagic.Controller();
+
+  var navOffset = ($('.nav').offsetHeight + $('#progress-div').offsetHeight) || 0
+
+  var pin_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: '400%', offset: (-navOffset), reverse: true})
+    .on('enter', function(){
+      this.setPin(this.triggerElement(), {pushFollowers: false})
+    })
+    .addTo(controller)
+
+  var duration_per = pin_scene.duration() / 4
+
+  var first_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (-navOffset), reverse: true})
+    .on('start', (e) =>{
+      var isForward = e.scrollDirection == 'FORWARD' ? true : false
+      if (isForward){
+        new TimelineMax()
+          .add(TweenMax.to($('#marker-bukit-2'), 0.5, visiable_opt))
+          .add(TweenMax.to($('#bukit-text-2'), 0.5, visiable_opt))
+      } else {
+        var targets = [$('#marker-bukit-2'), $('#bukit-text-2')]
+        TweenMax.killTweensOf(targets)
+        TweenMax.to(targets, 0.5, hidden_opt)
+      }
+    })
+    .addTo(controller);
+
+  var second_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (duration_per-navOffset), reverse: true})
+    .on('start', (e) =>{
+      var isForward = e.scrollDirection == 'FORWARD' ? true : false
+      if (isForward){
+        new TimelineMax()
+          .add(TweenMax.to($('#marker-alor-2'), 0.5, visiable_opt))
+      } else {
+        var targets = [$('#marker-alor-2')]
+        TweenMax.killTweensOf(targets)
+        TweenMax.to(targets, 0.5, hidden_opt)
+      }
+    })
+    .addTo(controller);
+
+  var thrid_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (2*duration_per-navOffset), reverse: true})
+    .on('start', (e) =>{
+      var isForward = e.scrollDirection == 'FORWARD' ? true : false
+      if (isForward){
+        new TimelineMax()
+          .add(TweenMax.to($('#marker-sadao-2'), 0.5, visiable_opt))
+      } else {
+        var targets = [$('#marker-sadao-2')]
+        TweenMax.killTweensOf(targets)
+        TweenMax.to(targets, 0.5, hidden_opt)
+      }
+    })
+    .addTo(controller);
+
+  var forth_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (3*duration_per-navOffset), reverse: true})
+    .on('start', (e) =>{
+      var isForward = e.scrollDirection == 'FORWARD' ? true : false
+      if (isForward){
+        new TimelineMax()
+          .add(TweenMax.to($('#marker-police-2'), 0.5, visiable_opt))
+      } else {
+        var targets = [$('#marker-police-2')]
+        TweenMax.killTweensOf(targets)
+        TweenMax.to(targets, 0.5, hidden_opt)
+      }
+    })
+    .addTo(controller);
+
 }
 
 Malaysia.MapCtrlM1 = () => {
