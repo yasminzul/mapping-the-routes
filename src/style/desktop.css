@@ -11,25 +11,52 @@
 		display: none;
 	}
 
-  .header { 
-    background-image: url('assets/images/header-image-desktop.jpg'); 
+  .header {
+    background-image: url('assets/images/header-image-desktop.jpg');
   }
 
   .header-container{
-		margin: 0 28% 0 12%;
+		margin: 5% 0 0 50%;
 	}
 
-	.header-title{
+	.header-title div{
 		font-size: 7vw;
+		line-height: 0.85;
+	}
+
+	.header-intro{
+		margin-bottom: 2vh;
+		font-size: 1vw;
+		width: 55%;
+
+	}
+
+	.header-indent{
+		margin-left: 5vw;
+	}
+
+	.header-button button
+	{
+		background-color: #dcba7d;
+		font-size: 1.2em;
+		border-radius: 1vh;
+		padding: 1vh 1vw;
+		transition: all .3s ease-in-out;
+		margin-top: 0;
+	}
+
+	.header-button
+	{
+		margin-top: 4vh;
 	}
 
 	.nav {
-		height: 23px;
+		height: 40px;
 		padding: 0 30px;
 	}
 
 	#progress-div{
-    top: 23px !important;
+    top: 40px !important;
   }
 
   .footer{
