@@ -168,6 +168,7 @@ Malaysia.MapCtrl2 = () => {
     })
     .addTo(controller);
 
+  return controller
 }
 
 Malaysia.MapCtrlM1 = () => {
