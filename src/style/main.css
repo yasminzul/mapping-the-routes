@@ -342,37 +342,3 @@ a:hover {
   color: white;
   pointer-events: none;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-/*snazzy map*/
-.snazzy{
-	/*960 : 540*/
-	width: 100vw;
-	height: 56.25vw;
-	margin-left: -15px;
-	margin-right: -15px;
-	background-size: cover;
-	position: relative;
-}
-
-.routes-svg, .routes-bg{
-	width: 100%;
-}
-
-.routes-svg{
-	position: absolute;
-	left: 0;
-	top: 0;
-}
-
-.routes-bg{
-	position: absolute;
-	display: block;
-	height: auto;
-	left: 0;
-	top: 0;
-}
-=======
->>>>>>> upstream/master
