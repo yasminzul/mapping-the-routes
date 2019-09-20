@@ -174,18 +174,8 @@ function changeBg($map, src){
 	$map.querySelector('.routes-map-bg-m').src = src
 }
 
-<<<<<<< HEAD
 const init = () => {
   Malaysia.MapCtrl1()
-=======
-const init = (isDesktop) => {
-  if (isDesktop){
-    //return all controllers
-    return [Malaysia.MapCtrl1()]
-  } else {
-    return [Malaysia.MapCtrlM1()]
-  }
->>>>>>> upstream/master
 }
 
 export default { init }
