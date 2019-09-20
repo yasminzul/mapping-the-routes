@@ -344,68 +344,7 @@
 
 <!-- image preloader -->
 <div style="display: none;">
-  <script type="text/javascript">
-    <!--//--><![CDATA[//><!--
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 5afb1b1... new desktop routes map, mobile caption styles
-      //init
-      var isDesktopPrev = window.matchMedia("(min-device-width: 480px)").matches
-      loadHeaderVideo(isDesktopPrev)
-      //window resize:
-      window.onresize = function(){
-        var isDesktop = window.matchMedia("(min-device-width: 480px)").matches
-<<<<<<< HEAD
-        // device change
-=======
-        // device change 
->>>>>>> parent of 5afb1b1... new desktop routes map, mobile caption styles
-        if (isDesktop != isDesktopPrev){
-          loadHeaderVideo(isDesktop)
-          isDesktopPrev = isDesktop
-        }
-      }
-
-      //media query
-      function loadHeaderVideo(isDesktop){
-        var video = document.querySelector('#header-video')
-        var source = document.querySelector('#header-video > source')
-
-        if (isDesktop){
-          video.poster = "assets/images/header-image-desktop.jpg"
-          source.src = "assets/images/pangolinreports_header.mp4"
-          video.load()
-        } else {
-          video.poster = "assets/images/header-thumbnail-portrait.jpg"
-          source.src = "assets/images/pangolinreports_header_portrait.mp4"
-          video.load()
-        }
-      }
-
-<<<<<<< HEAD
->>>>>>> contribution-css
-=======
->>>>>>> parent of 5afb1b1... new desktop routes map, mobile caption styles
-      //preload
-      var images = new Array()
-      function preload() {
-        for (i = 0; i < preload.arguments.length; i++) {
-          images[i] = new Image()
-          images[i].src = preload.arguments[i]
-        }
-      }
-      preload(
-        'assets/maps/Malaysia/IMG/map-01.jpg',
-        'assets/maps/Malaysia/IMG/map-02.jpg',
-        'assets/maps/Malaysia/IMG/map-03.jpg',
-        'assets/maps/Malaysia/IMG/map-04.jpg',
-        'assets/maps/Malaysia/IMG/map-05.jpg',
-        'assets/maps/Malaysia/IMG/map-06.jpg',
-      )
-    //--><!]]>
-  </script>
+  
 </div>
 </body>
 
