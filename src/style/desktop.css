@@ -75,4 +75,23 @@
   	top: 0;
   	left: 100%;
   }
+<<<<<<< HEAD
 }
+=======
+
+  .snazzy{
+		margin: 0 -25vw;
+	}
+
+	/*animated map svg v1 [deprecated]*/
+  #map-container{
+		margin: 0 -25vw !important;
+	}
+
+	.scrollmagic-pin-spacer {
+		margin: 0 -25vw !important;
+		/*padding-left: 25vw !important;*/
+	}
+  /*animated map svg v1 [deprecated]*/
+}
+>>>>>>> contribution-css

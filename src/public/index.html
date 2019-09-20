@@ -22,14 +22,14 @@
      srcset="assets/images/pangolin-logo/Pangolin-logo-m@2x.png 2x,
              assets/images/pangolin-logo/Pangolin-logo-m@3x.png 3x"
      class="pangolin-logo">
-    <div class="mobile-hidden white">The Pangolin Reports | </div>
+    <div class="mobile-hidden white"><a href="https://www.pangolinreports.com/">The Pangolin Reports </a>| </div>
     <div class="serif yellow">&nbsp;TRAFFICKED TO EXTINCTION</div>
   </div>
   <div class="nav-right">
     <div class="icon"><a href="https://twitter.com/pangolinreports" target="_blank"><img src="assets/images/Twitter.svg"></a></div>
     <div class="icon"><a href="https://www.facebook.com/thepangolinreports/" target="_blank"><img src="assets/images/Facebook.svg"></a></div>
   </div>
-</div>  
+</div>
 <div id="progress-div">
   <div id="percent"></div>
   <div id="progress-bar"></div>
@@ -149,7 +149,7 @@
     <div class="byline">
       <div>By elroi yee & samantha chow,</div>
       <div>On August 21, 2019</div>
-      <span class="bookmark"></span> 
+      <span class="bookmark"></span>
     </div>
     <div id="trigger1">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -186,7 +186,7 @@
     <div class="byline">
       <div>By elroi yee & samantha chow,</div>
       <div>On August 21, 2019</div>
-      <span class="bookmark"></span> 
+      <span class="bookmark"></span>
     </div>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -236,7 +236,7 @@
   <div class="footer">
     <img src="assets/images/pangolin-logo-footer.svg" class="pangolin-logo-footer">
     <div style="margin-top: 15px;">
-      <div class="footer-icons">Term of Site 
+      <div class="footer-icons">Term of Site
         <div class="footer-icon"><a href="https://twitter.com/pangolinreports" target="_blank"><img src="assets/images/Twitter.svg"></a></div>
         <div class="footer-icon"><a href="https://www.facebook.com/thepangolinreports/" target="_blank"><img src="assets/images/Facebook.svg"></a></div>
         <div class="footer-icon"><a href="https://www.linkedin.com/company/14651067" target="_blank"></a><img src="assets/images/Linkedin.svg"></div>
@@ -325,6 +325,38 @@
 <div style="display: none;">
   <script type="text/javascript">
     <!--//--><![CDATA[//><!--
+<<<<<<< HEAD
+=======
+      //init
+      var isDesktopPrev = window.matchMedia("(min-device-width: 480px)").matches
+      loadHeaderVideo(isDesktopPrev)
+      //window resize:
+      window.onresize = function(){
+        var isDesktop = window.matchMedia("(min-device-width: 480px)").matches
+        // device change
+        if (isDesktop != isDesktopPrev){
+          loadHeaderVideo(isDesktop)
+          isDesktopPrev = isDesktop
+        }
+      }
+
+      //media query
+      function loadHeaderVideo(isDesktop){
+        var video = document.querySelector('#header-video')
+        var source = document.querySelector('#header-video > source')
+
+        if (isDesktop){
+          video.poster = "assets/images/header-image-desktop.jpg"
+          source.src = "assets/images/pangolinreports_header.mp4"
+          video.load()
+        } else {
+          video.poster = "assets/images/header-thumbnail-portrait.jpg"
+          source.src = "assets/images/pangolinreports_header_portrait.mp4"
+          video.load()
+        }
+      }
+
+>>>>>>> contribution-css
       //preload
       var images = new Array()
       function preload() {
