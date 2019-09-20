@@ -1,10 +1,8 @@
-import TweenMax from 'TweenMax'
-import ScrollMagic from 'ScrollMagic'
-import 'animation.gsap'
-import * as d3 from 'd3'
+import Malaysia from './malaysia.js'
 
-import 'debug.addIndicators'
+const RoutesCtrl = {}
 
+<<<<<<< HEAD
 const $ = q => document.querySelector(q)
 const MOBILE = 'assets/maps/Malaysia/mobile/'
 
@@ -176,6 +174,15 @@ function changeBg($map, src){
 
 const init = () => {
   Malaysia.MapCtrl1()
+=======
+RoutesCtrl.init = (isDesktop) => {
+  if (isDesktop){
+    //return all controllers
+    return [Malaysia.MapCtrl1(), Malaysia.MapCtrl2()]
+  } else {
+    return [Malaysia.MapCtrlM1(), Malaysia.MapCtrlM2(), Malaysia.MapCtrlM3()]
+  }
+>>>>>>> upstream/master
 }
 
-export default { init }
+export default RoutesCtrl
