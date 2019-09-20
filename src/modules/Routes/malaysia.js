@@ -125,6 +125,11 @@ Malaysia.MapCtrl2 = () => {
         new TimelineMax()
           .add(TweenMax.to($('#marker-bukit-2'), 0.5, visiable_opt))
           .add(TweenMax.to($('#bukit-text-2'), 0.5, visiable_opt))
+          .addCallback(()=>{
+            pulseMarker([
+              $('#marker-bukit-2')
+            ])
+          }, 1)
       } else {
         var targets = [$('#marker-bukit-2'), $('#bukit-text-2')]
         TweenMax.killTweensOf(targets)
@@ -138,9 +143,15 @@ Malaysia.MapCtrl2 = () => {
       var isForward = e.scrollDirection == 'FORWARD' ? true : false
       if (isForward){
         new TimelineMax()
-          .add(TweenMax.to($('#marker-alor-2'), 0.5, visiable_opt))
+          .add(TweenMax.to($('#marker-alor'), 0.5, visiable_opt))
+          .add(TweenMax.to($('#alor-text'), 0.5, visiable_opt))
+          .addCallback(()=>{
+            pulseMarker([
+              $('#marker-alor')
+            ])
+          }, 1)
       } else {
-        var targets = [$('#marker-alor-2')]
+        var targets = [$('#marker-alor'), $('#alor-text')]
         TweenMax.killTweensOf(targets)
         TweenMax.to(targets, 0.5, hidden_opt)
       }
@@ -152,9 +163,15 @@ Malaysia.MapCtrl2 = () => {
       var isForward = e.scrollDirection == 'FORWARD' ? true : false
       if (isForward){
         new TimelineMax()
-          .add(TweenMax.to($('#marker-sadao-2'), 0.5, visiable_opt))
+          .add(TweenMax.to($('#marker-sadao'), 0.5, visiable_opt))
+          .add(TweenMax.to($('#sadao-text'), 0.5, visiable_opt))
+          .addCallback(()=>{
+            pulseMarker([
+              $('#marker-sadao')
+            ])
+          }, 1)
       } else {
-        var targets = [$('#marker-sadao-2')]
+        var targets = [$('#marker-sadao'), $('#sadao-text')]
         TweenMax.killTweensOf(targets)
         TweenMax.to(targets, 0.5, hidden_opt)
       }
@@ -166,9 +183,15 @@ Malaysia.MapCtrl2 = () => {
       var isForward = e.scrollDirection == 'FORWARD' ? true : false
       if (isForward){
         new TimelineMax()
-          .add(TweenMax.to($('#marker-police-2'), 0.5, visiable_opt))
+          .add(TweenMax.to($('#marker-police'), 0.5, visiable_opt))
+          .add(TweenMax.to($('#kedahpolice-text'), 0.5, visiable_opt))
+          .addCallback(()=>{
+            pulseMarker([
+              $('#marker-police')
+            ])
+          }, 1)
       } else {
-        var targets = [$('#marker-police-2')]
+        var targets = [$('#marker-police'), $('#kedahpolice-text')]
         TweenMax.killTweensOf(targets)
         TweenMax.to(targets, 0.5, hidden_opt)
       }
