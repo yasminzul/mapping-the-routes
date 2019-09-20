@@ -112,9 +112,6 @@ a {
 	font-weight: bold;
 	z-index: 1;
 
-	position: absolute;
-	top: 15vh;
-	left: 18vw;
 }
 
 .header-title{
