@@ -26,6 +26,7 @@ const Malaysia = {
   maps_m: [
     $('#malaysia-routes-m-1'),
     $('#malaysia-routes-m-2'),
+    $('#malaysia-routes-m-3'),
   ]
 }
 
@@ -254,6 +255,22 @@ Malaysia.MapCtrlM2 = () => {
     .on('start', (e) => { switchByDir(e, map, Malaysia.pics_m[6], Malaysia.pics_m[5]) })
     .addTo(controller);
 
+  return controller
+}
+
+Malaysia.MapCtrlM3 = () => {
+  var map = Malaysia.maps_m[2]
+
+  var controller = new ScrollMagic.Controller();
+
+  var navOffset = ($('.nav').offsetHeight + $('#progress-div').offsetHeight) || 0
+
+  var pin_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: '100%', offset: (-navOffset), reverse: true})
+    .on('enter', function(){
+      this.setPin(this.triggerElement(), {pushFollowers: false})
+    })
+    .addTo(controller)
+    
   return controller
 }
 
