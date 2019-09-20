@@ -7,7 +7,7 @@ RoutesCtrl.init = (isDesktop) => {
     //return all controllers
     return [Malaysia.MapCtrl1(), Malaysia.MapCtrl2()]
   } else {
-    return [Malaysia.MapCtrlM1()]
+    return [Malaysia.MapCtrlM1(), Malaysia.MapCtrlM2()]
   }
 }
 
